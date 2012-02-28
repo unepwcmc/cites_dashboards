@@ -1,0 +1,11 @@
+<div id='speciesdiv' style='margin-top:20px;'>
+    <%= @barchart %><br />
+    <select id='speciesselect' onchange='generate_species_trade()'>
+         <% 0.upto(@sources["species"].length-1) do |i|  %>
+              <option value="<%= @sources["species"][i].to_s %>" <%= (@sources["species"][i].to_s == @speciescode.to_s ? 'selected="true"' : '') %>><%= @sources["xaxislabels"][i] %></option>
+         <% end %>
+    </select>
+    <a id="speciesanchor" class="tooltip" href="#speciesselecttooltip" rel="#speciesselecttooltip" ><%= image_tag "information.png" %></a>
+    <p id="speciesselecttooltip">Select a species from the drop-down list to see trade over time information for other top species in trade.</p>
+    <script>setCluetip("#speciesanchor");</script>
+</div>

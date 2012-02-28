@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  iso_country_code: MyString
+  iso_english_short_name: MyString
+  iso_english_long_name: MyString
+
+two:
+  iso_country_code: MyString
+  iso_english_short_name: MyString
+  iso_english_long_name: MyString

@@ -1,0 +1,11 @@
+<div id='speciesdiv' style='margin-top:20px;'>
+    <%= @barchart %> <br />
+    <select id='speciesselect' onchange='generate_families_trade()'>
+         <% 0.upto(@sources["xaxislabels"].length-1) do |i|  %>
+              <option value='<%= @sources["xaxislabels"][i].to_s %>' <%= (@sources["xaxislabels"][i].to_s == @familyname ? 'selected="true"' : '') %>> <%= @sources["xaxislabels"][i] %> </option>
+         <% end %>
+    </select>
+    <a id="familiesanchor" class="tooltip" href="#familiesselecttooltip" rel="#familiesselecttooltip" ><%= image_tag "information.png" %></a>
+    <p id="familiesselecttooltip">Select a Family from the drop-down list to see trade over time information for other top Families in trade.</p>
+    <script>setCluetip("#familiesanchor");</script>
+</div>

@@ -1,0 +1,55 @@
+page.replace_html("chart", @chart)
+page.replace_html("label", :partial => "label", :object => @controlpanel)
+
+if @controlpanel.class == NationalControlPanel
+    page.replace_html("country_info", :partial => "country_label", :object => @controlpanel)
+    page.replace_html("distribution", :partial => "distribution", :object => @distribution)
+end
+
+if session[:group] != @controlpanel.group
+  page.replace("terms", :partial => "shared/term_select", :object => @controlpanel)
+  page.replace("sources", :partial => "shared/source_select", :object => @controlpanel)
+end
+session[:group] = @controlpanel.group
+session[:controlpanel] = @controlpanel
+
+page.replace_html("legend", @legend)
+page.replace_html("reporttype", @reporttype)
+
+page.select('#terms').first.show
+page.show 'sources'
+page.show 'years'
+if @controlpanel.display == "Distribution"
+  page.select('#terms').first.hide
+  page.hide 'sources'
+  page.hide 'years'
+end
+
+if @controlpanel.display == "Sources"
+  page.hide 'sources'
+end
+
+if @controlpanel.display == "Terms"
+  page.select('#terms').first.hide
+end
+
+if ["Importers","Exporters"].include?(@controlpanel.display) or
+        (@controlpanel.class == GlobalControlPanel and @controlpanel.display == "Time")  or
+        (@controlpanel.class == NationalControlPanel and @controlpanel.display == "Distribution")
+    page.hide 'tabbar'
+else
+    page.show 'tabbar'
+end
+
+page.replace_html("map", "")
+if ["Importers","Exporters","Re-exports"].include?(@controlpanel.display)
+  page.show 'map'
+else
+  page.hide 'map'
+end
+if @mapdataarray != nil
+    page.assign 'dataarray',  @mapdataarray
+    page.assign 'legend', GroupTerm.term_description(@controlpanel.term)
+    page.call 'drawMap'
+end
+

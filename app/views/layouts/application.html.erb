@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+	<title>CITES Trade Dashboard</title>
+	<%= stylesheet_link_tag "dashboard", :media => "all" %>
+	<%= stylesheet_link_tag "customformelements", :media => "all" %>
+	<%= stylesheet_link_tag 'lavalamp/lavalamp3', :media => "all" %>
+	<%= stylesheet_link_tag 'jquery.cluetip' %>
+	<%= stylesheet_link_tag 'select', :media => "all"  %>
+    <%= stylesheet_link_tag 'cites' %>
+
+	<%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag "custom-form-elements" %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+	<script>jQuery.noConflict(); </script>
+	<%= javascript_include_tag 'lavalamp/jquery.easing.1.3', 'lavalamp/jquery.lavalamp.1.3.3-min'%>
+	<%= javascript_include_tag 'jquery.hoverIntent.min' %>
+	<%= javascript_include_tag 'jquery.cluetip.min' %>
+	<%= javascript_include_tag "select" %>
+	<%= javascript_include_tag "dashboards" %>
+	
+	<%= javascript_tag "var RAILS_ROOT = '#{ActionController::Base.relative_url_root}';" -%>
+	
+	<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+	<script type='text/javascript'>
+	google.load('visualization', '1', {'packages': ['geomap']});
+	google.setOnLoadCallback(drawMap);     //dashboards.js
+	var dataarray = [];
+	var datawrapper = [];
+	var legend = 'Live (number of)';
+	datawrapper.push(<%= @mapdata %>);
+	if (datawrapper.length > 0) dataarray = datawrapper[0];
+	</script>
+
+      <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17296283-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+</head>
+<body>
+    <%= render(:partial => "shared/cites_header") %>
+	<div id="page">
+        <div class="headgreen">CITES Trade Data Dashboards</div>
+		<div id="content">
+			<div id="navigation" style="float:right;">
+				<ul id="lavaLampBorderOnly" class="lamp">
+					<li><%= link_to "About the Dashboards", about_path %></li>
+					<li><%= link_to "Global Dashboard", global_path %></li>
+					<li><%= link_to "National Dashboard", national_path %></li>  
+				</ul>
+			</div>
+			<p style="clear:both"></p>
+			<%= yield %>
+		</div>
+		<div id="wcmcfooter">
+			<div class="middle">
+				This facility was developed and is maintained by UNEP-WCMC for the CITES Secretariat.
+			</div>
+		</div>
+	</div>
+    <%= render(:partial => "shared/cites_footer") %>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reporter_type: MyString
+  shipment_year: 1
+  group: MyString
+  term_code: MyString
+  unit_code: MyString
+  quantity: 1.5
+  source_code: MyString
+  purpose_code: MyString
+
+two:
+  reporter_type: MyString
+  shipment_year: 1
+  group: MyString
+  term_code: MyString
+  unit_code: MyString
+  quantity: 1.5
+  source_code: MyString
+  purpose_code: MyString

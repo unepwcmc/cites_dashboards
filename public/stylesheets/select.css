@@ -1,0 +1,76 @@
+/* Based on http://www.devarticles.com/c/a/Web-Style-Sheets/Taming-the-Select/1/ */
+/*body{
+    margin:0;
+    padding:1em;
+    font-family:arial,sans-serif;
+}*/
+
+.trigger, .activetrigger {
+    border:1px solid #7F9DB9;
+    /*    color:green;
+        padding-right:1em;*/
+    width:10.5em;
+    margin-left:6em;
+    display:block;
+    padding:1px 18px 3px 4px;
+    background:url("../images/dropdown.bluealternative.png") top right no-repeat #FFFFFF;
+    text-decoration:none;
+    color:black;
+}
+.trigger{
+    /*position:relative;*/
+}
+.activetrigger{
+    /*background:#ccc;*/
+}
+/* style of the UL */
+.dropcontainer ul{
+    background:#fff;
+    border:1px solid #999;
+    /*border-bottom:none;*/
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    width:19em;
+    position:absolute;
+    height:12em;
+    overflow-y:scroll;
+}
+
+.dropcontainer li {
+    text-indent: -6px;
+}
+.dropcontainer li.indent{
+    padding-left: 12px;
+}
+
+.dropdownhidden{
+    top:0;
+    left:-999em;
+}
+.dropdownvisible{
+    top:0;
+    /*left:0;*/
+    left:6em;
+}
+.dropcontainer ul a{
+    padding:1px 0 1px 0.5em;
+    display:block;
+    /*width:16em;*/
+    width:94%;
+    text-decoration:none;
+    color:black;
+    /*border-bottom:1px solid #999;*/
+}
+.dropcontainer ul a:hover, .dropcontainer a.dropdownselected {
+    background:#316ac5;
+    color:white;
+}
+
+.dropcontainer a.dropdownunselected {
+    background:white;
+    color:black;
+}
+.dropcontainer{
+    position:relative;
+}

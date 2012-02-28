@@ -1,0 +1,33 @@
+<% content_for("banner") do -%>
+<!-- <img src="../images/mapWithLinesCropped.gif" alt="Banner Logo"/> -->
+<%= image_tag "mapWithLinesCropped.gif", :alt => 'Banner Logo' %>
+<% end -%>
+<div id="results">
+	<div id="label">
+	</div>
+	<div align="right" class="tabbar"  id="tabbar" style="display:none"><span href="" id="importers" class="tab" >Imports </span><span id="exporters" class="tab">Exports    </span></div>
+	<br />
+	<fieldset id="contentfieldset">
+		<legend id="reporttype"><%= @reporttype %></legend>
+		<div id="legend" style="margin:auto;text-align:center"><%= @legend %></div><br/>
+		<div id="map"  style="display:none"></div>
+		<br />
+		<div id="chart">
+				<%= image_tag "loading.gif", :alt => 'Loading...' %>
+			<!-- <img src="../images/loading.gif" alt="Loading..."/> -->
+		</div>
+		<div id="distribution">
+		</div>
+	</fieldset>
+	<hr />
+	<div style="line-height:15px">
+		Note: This dashboard is designed to give an overview of CITES trade data, and it only shows a subset of the over 10 million records found in the CITES trade database. For a more detailed query of all CITES trade data, visit the <a href="http://www.unep-wcmc.org/citestrade/trade.cfm">CITES Trade Database</a>.
+	</div>
+</div>
+<div id="control_panel">
+	<fieldset id="country_info">
+	</fieldset>
+	<%= render(:partial => "shared/control_panel") %>
+</div>
+
+

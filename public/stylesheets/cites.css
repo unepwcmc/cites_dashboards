@@ -1,0 +1,46 @@
+#citesmenu {
+background:none repeat scroll 0 0 #000099;
+clear:both;
+height:17px;
+padding:0;
+top:74px;
+voice-family:inherit;
+}
+
+#head {
+background:url("http://www.cites.org/eng/graphics/head.gif") no-repeat scroll left center #339900;
+float:left;
+height:57px;
+margin:0;
+padding:0;
+top:0;
+width:100%;
+}
+
+#footer {
+text-align:center;
+width:66%;
+}
+#footer a:link, #footer a:visited {
+background:none repeat scroll 0 0 #339900;
+border:6px solid #FFFFFF;
+color:#FFFFFF;
+display:block;
+font-family:Verdana,Arial,Helvetica,sans-serif;
+font-size:10px;
+font-weight:bold;
+padding:3px;
+text-align:center;
+text-decoration:none;
+}
+#footer a:hover {
+color:#FFFF33;
+}
+.headgreen {
+    color:#339900;
+    font-size:17px;
+    font-weight:bold;
+    text-align:center;
+    margin-top:50px;
+    margin-bottom:15px;
+}

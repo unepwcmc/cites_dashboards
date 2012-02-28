@@ -1,0 +1,6 @@
+<strong><%= @controlpanel.countrydescription %></strong>  <br /> <br />
+<% if @tradingcountry["entry_date"] != nil %>
+    <%= @controlpanel.countrydescription %> joined CITES in <%= @tradingcountry["entry_date"] %>.
+<% else %>
+    <%= @controlpanel.countrydescription %> is not a Party to CITES.
+<% end %>

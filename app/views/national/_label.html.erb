@@ -1,0 +1,38 @@
+<% if @controlpanel.display == "Distribution" %>
+    <div class="h2">Summary of CITES-listed <%=h @controlpanel.group.downcase%> that occur in <%= @controlpanel.countrydescription %></div>
+    <p>
+      For a complete list of CITES-listed species that occur in <%= @controlpanel.countrydescription %>, visit the <a href="http://www.cites.org/eng/resources/species.html">CITES species database</a>.
+    </p>
+     <br />
+<% elsif @controlpanel.display == "Re-exports" %>
+    <div class="h2"><%=h @controlpanel.group %> re-exported by <%= @controlpanel.countrydescription %></div>
+    <p>
+      <% if @controlpanel.display != "Sources" %>
+        <strong>Source:</strong> <%=h @controlpanel.sourcedescription %>
+      <% end %>
+      <% if @controlpanel.display != "Terms" %>
+        <strong>Term:</strong> <%=h @controlpanel.termdescription %>
+      <% end %>
+      <strong>Years:</strong> <%=h @controlpanel.dateendpoints['startdate'].to_s + "-" + @controlpanel.dateendpoints['enddate'].to_s %>
+    </p>
+    <p>
+      <% unless @controlpanel.display ==  "Time" %>(all data displayed were reported by <%= @controlpanel.countrydescription %>) <% end %>
+    </p>
+    <br />
+<% else %>
+    <div class="h2">Trade in <%=h @controlpanel.group.downcase%> by <%= @controlpanel.countrydescription %></div>
+    <p>
+      <% if @controlpanel.display != "Sources" %>
+        <strong>Source:</strong> <%=h @controlpanel.sourcedescription %>
+      <% end %>
+      <% if @controlpanel.display != "Terms" %>
+        <strong>Term:</strong> <%=h @controlpanel.termdescription %>
+      <% end %>
+      <strong>Years:</strong> <%=h @controlpanel.dateendpoints['startdate'].to_s + "-" + @controlpanel.dateendpoints['enddate'].to_s %>
+    </p>
+    <p>
+      <% unless @controlpanel.display ==  "Time" %>(all data displayed were reported by <%= @controlpanel.countrydescription %>) <% end %>
+    </p>
+    <br />
+
+<% end %>

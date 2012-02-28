@@ -1,0 +1,22 @@
+<% countries = TradingCountry.find(:all, :conditions => "exclude_from_selection = false").sort{|a,b| a.name <=> b.name} %>
+<select name="controlpanel[country]" id="controlpanel_country" class="turnintodropdown">
+<% countries.each { |c|%>
+  <% if c.dependency_of == nil %>
+      <% dependencies = c.dependent_territories.sort{|a,b| a.name <=> b.name}%>
+        <% if dependencies.length > 0 %>
+            <optgroup label="<%=c.name + ' and its territories' %>">
+            <option value="<%=c.iso_country_code%>" <%if c.iso_country_code == @controlpanel.country%>selected="true"<%end%>><%=c.name%></option>
+            <% dependencies.each {|d|               
+               shortName = d.name#PivotalTracker Story 346980
+               if  d.name.index('(') != nil
+                shortName = d.name[0..(d.name.index('(')-2)]
+               end
+            %>
+            <option value="<%=d.iso_country_code%>" class="indent" <%if d.iso_country_code == @controlpanel.country%>selected="true"<%end%>><%=shortName%></option><% } %>
+            </optgroup>
+        <% else %>
+          <option value="<%=c.iso_country_code%>"<%if c.iso_country_code == @controlpanel.country%>selected="true"<%end%>><%=c.name%></option>
+        <% end %>
+  <% end %>
+<%}%>
+</select>

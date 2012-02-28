@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  Name: MyString
+  iso_country_code: MyString
+  entry_date: 1
+  cites_region_id: 1
+
+two:
+  Name: MyString
+  iso_country_code: MyString
+  entry_date: 1
+  cites_region_id: 1

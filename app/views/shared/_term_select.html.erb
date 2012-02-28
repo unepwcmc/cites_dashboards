@@ -1,0 +1,5 @@
+  <div id="terms"  class="parameters"><span class="label"><%= label :term, "Term:" %><a class="tooltip" href="#termtooltip" rel="#termtooltip" ><%= image_tag "information.png" %></a> </span>
+    <%= @terms = GroupTerm.terms[@controlpanel.group]
+        select("controlpanel","term", options_from_collection_for_select(@terms, :last, :first,@controlpanel.term.to_i),{},{:onchange => "FireUpdate();"}) %>
+
+  </div>

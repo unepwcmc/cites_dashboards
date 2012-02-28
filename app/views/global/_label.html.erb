@@ -1,0 +1,14 @@
+<!--<h1><%=h @controlpanel.displaydescription %></h1> -->
+<div class="h1">Global trade in <%=h @controlpanel.group.downcase %> </div>
+<div>
+  <% if @controlpanel.display != "Sources" %>
+    <strong>Source:</strong> <%=h @controlpanel.sourcedescription %>
+  <% end %>
+   <% if @controlpanel.display != "Terms" %>
+    <strong>Term:</strong> <%=h @controlpanel.termdescription %>
+   <% end %>
+  <strong>Years:</strong> <%=h @controlpanel.dateendpoints['startdate'].to_s + "-" + @controlpanel.dateendpoints['enddate'].to_s %>
+</div>
+<br />
+
+<br />

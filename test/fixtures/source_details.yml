@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  [source_code: MyString
+  source_english_name: MyString
+  source_french_name: MyString
+  source_spanish_name: 
+
+two:
+  [source_code: MyString
+  source_english_name: MyString
+  source_french_name: MyString
+  source_spanish_name: 

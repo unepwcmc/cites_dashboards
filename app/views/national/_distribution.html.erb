@@ -1,0 +1,18 @@
+<% if @distribution.length == 0 and @controlpanel.display == "Distribution" %>
+    <div style="text-align:center">No data for this selection</div>
+<% end %>
+<% @distribution.each do |p| %>
+    <div class="phylum">Phylum: <%= p[0] %> </div>
+    <% p[1].each do |key,value| %>
+        <div class="class">Class: <%= key %> </div>                   <!-- Class -->
+        <% value.each do |key2,value2| %>
+            <div class="order">Order: <%= key2 %>  </div>           <!-- Order -->
+                <% value2.each do |key3,value3| %>
+                    <div class="family">Family: <%= key3 %>  </div>      <!-- Family -->
+                    <% value3.each do |species| %>
+                        <div class="species">  <%= species.genus_name %> <%= species.species_name %>  <%= species.species_subname %>&nbsp;<%= species.species_author %>  </div>      <!-- Species -->
+                    <% end %>
+                <% end %>
+        <% end %>
+    <% end %>
+<% end %>

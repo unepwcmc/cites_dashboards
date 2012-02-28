@@ -1,0 +1,8 @@
+.idea
+.idea/** /*
+tmp
+tmp/** /*
+log/*.log
+public/system
+db/schema.rb
+config/database.yml

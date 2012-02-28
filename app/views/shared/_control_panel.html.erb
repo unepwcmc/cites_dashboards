@@ -1,0 +1,124 @@
+<% session[:group] = @controlpanel.group %>
+<% session[:controlpanel] = @controlpanel %>
+<% form_for :controlpanel, @controlpanel, :html => {:id => 'control_form'}  do |f| %>
+<fieldset>
+  <legend>
+    Select Group
+    <a class="tooltip" href="#grouptooltip" rel='#grouptooltip'><%= image_tag "information.png" %></a>
+  </legend>
+  <ul class="gallery">
+    <% GroupTerm.groups.each { |x| %>
+        <li>
+          <%= f.radio_button :group, x, :class => 'styled' %><br /><div id=<%= 'label_controlpanel_group_' + x.downcase.gsub(/[ ]/, '_').gsub(/[()]/, '').gsub(/[&]/, '').gsub(/[-]/, '')%>><%= x %></div>
+        </li>
+    <%} %>
+  </ul>
+</fieldset>
+
+<fieldset id="parameters">
+  <legend>
+    Select Parameters
+    <a class="tooltip" href="#parameterstooltip" rel="#parameterstooltip" ><%= image_tag "information.png" %></a>
+  </legend>
+   <br />
+  <% if @controlpanel.class == NationalControlPanel %>
+      <div  class="parameters"><span class="label"><%= f.label :country, "Country:" %></span>
+        <%= render(:partial => "country_list")%>  
+      </div>
+  <% end %>
+  <div  id="years" class="parameters"><span class="label"><%= f.label :date_range, "Year Range:" %></span>
+    <%= @dates = GlobalControlPanel.dates()
+        f.select(:date_range, options_from_collection_for_select(@dates, :last, :first,@controlpanel.date_range.to_i)) %></div>
+  <div id="terms"  class="parameters"><span class="label"><%= f.label :term, "Term:" %><a class="tooltip" href="#termtooltip" rel="#termtooltip" ><%= image_tag "information.png" %></a> </span>
+    <%= @terms = GroupTerm.terms[@controlpanel.group]
+        f.select(:term, options_from_collection_for_select(@terms, :last, :first,@controlpanel.term.to_i)) %>
+
+  </div>
+  <div id="sources" class="parameters"><span class="label"><%= f.label :source, "Source:" %><a class="tooltip" href="#sourcetooltip" rel="#sourcetooltip" ><%= image_tag "information.png" %>
+	</a></span>
+    <%= @sources = SourceDetails.sources(@controlpanel.group)
+        f.select(:source, "<option value='All'>All</option>" + options_from_collection_for_select(@sources, :last, :first,@controlpanel.source)) %>    
+  </div>
+</fieldset>
+<fieldset id="datadisplay">
+  <legend>
+    Select Data to Display
+    <a class="tooltip" href="#datatooltip" rel="#datatooltip" ><%= image_tag "information.png" %></a>
+  </legend>
+    <ul >
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Time" %></td><td width="160px"><%= f.label :display, "Trade volume over time" %></td><td>
+        <% if @controlpanel.class == NationalControlPanel %>
+            <a class="tooltip" href="#tradetimenationaltooltip" rel="#tradetimenationaltooltip" ><%= image_tag "information.png" %></a>
+        <% else %>
+            <a class="tooltip" href="#tradetimeglobaltooltip" rel="#tradetimeglobaltooltip" ><%= image_tag "information.png" %></a>
+        <% end %>
+      </td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Sources" %></td><td width="160px"><%= f.label :display, "Trade by source" %></td><td><a class="tooltip" href="#tradesourcetooltip" rel="#tradesourcetooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Importers" %></td><td width="160px"><%= f.label :display, "Top 10 importing countries" %> </td><td>
+        <% if @controlpanel.class == NationalControlPanel %>
+            <a class="tooltip" href="#partnersnationaltooltipimporters" rel="#partnersnationaltooltipimporters" ><%= image_tag "information.png" %></a>
+        <% else %>
+            <a class="tooltip" href="#partnersglobaltooltipimporters" rel="#partnersglobaltooltipimporters" ><%= image_tag "information.png" %></a>
+        <% end %>
+        </td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Exporters" %></td><td width="160px"><%= f.label :display, "Top 10 exporting countries" %> </td><td>
+        <% if @controlpanel.class == NationalControlPanel %>
+            <a class="tooltip" href="#partnersnationaltooltipexporters" rel="#partnersnationaltooltipexporters" ><%= image_tag "information.png" %></a>
+        <% else %>
+            <a class="tooltip" href="#partnersglobaltooltipexporters" rel="#partnersglobaltooltipexporters" ><%= image_tag "information.png" %></a>
+        <% end %>
+      </td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Terms" %></td><td width="160px"><%= f.label :display, "Top 5 terms in trade" %></td><td><a class="tooltip" href="#tradetermstooltip" rel="#tradetermstooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Appendix" %></td><td width="160px"><%= f.label :display, "Appendix" %></td><td><a class="tooltip" href="#appendixtooltip" rel="#appendixtooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Species" %></td><td width="160px"><%= f.label :display, "Top 10 species in trade" %></td><td><a class="tooltip" href="#speciestooltip" rel="#speciestooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <li class="display"><table><tr><td><%= f.radio_button :display, "Families" %></td><td width="160px"><%= f.label :display, "Top 10 Families in trade" %></td><td><a class="tooltip" href="#familiestooltip" rel="#familiestooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <% if @controlpanel.class == NationalControlPanel %>
+        <li class="display"><table><tr><td><%= f.radio_button :display, "Re-exports" %></td><td width="160px"><%= f.label :display, "Re-exports" %></td><td><a class="tooltip" href="#reexportstooltip" rel="#reexportstooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+        <li class="display"><table><tr><td><%= f.radio_button :display, "Distribution" %></td><td width="160px"><%= f.label :display, "Species occurrence" %></td><td><a class="tooltip" href="#occurrencetooltip" rel="#occurrencetooltip" ><%= image_tag "information.png" %></a></td></tr></table></li>
+      <% end %>
+    </ul>
+</fieldset>
+ <br />
+    <ul class="gallery" style="display:none">
+        <li><%= f.radio_button :reportertype, "I" %><br /><%= f.label :reportertype, "Imported by selected country" %></li>
+        <li><%= f.radio_button :reportertype, "E" %><br /><%= f.label :reportertype, "Exported by selected country" %></li>
+    </ul>
+  <% end %>
+
+<!-- Text for tooltips -->
+<div style="display:none">
+    <p id="grouptooltip">Click on the appropriate icon to display trade information for the animal or plant group selected.</p>
+    <p id="parameterstooltip">Select from the drop-down lists below to determine the type of trade data shown. Trade terms vary depending on the taxonomic group selected, so it is best to start by selecting a taxonomic group from above. <br /> <br /> As 'Trade by source' or 'Top 5 terms in trade' provide an overview of multiple sources and trade terms, the option to select the source and trade term, respectively, will not appear when these buttons are selected below.  </p>
+    <p id="termtooltip">If the trade term does not include a unit of measurement (e.g. kg), the trade represents 'number' of that term (e.g. number of live animals). For a full list of CITES term codes and their definitions, see  the <a href= "http://www.cites.org/eng/notif/2006/E-ARguide.pdf">Guidelines for the preparation and submission of CITES annual reports</a> distributed by the Secretariat with Notification to the Parties 2006/030.</p>
+    <p id="sourcetooltip">For a full list of CITES source codes and their definitions, see <a href="http://www.cites.org/eng/res/12/12-03R14.shtml">Resolution Conf. 12.3 (Rev. CoP14)</a> on Permits and certificates.</p>
+    <p id="datatooltip">Clicking on the corresponding button allows you to change the way the data are displayed in the main viewing pane to the left. </p>
+    <p id="tradetimeglobaltooltip">Shows the trade over time, as reported by both importers and exporters, for the parameters selected.</p>
+    <p id="tradetimenationaltooltip">Shows the trade over time for the parameters selected. Trade reported by both the country selected and the trading partners is shown. Click on the 'Imports' and 'Exports' tab to switch between imports and exports.</p>
+    <p id="tradesourcetooltip">Source indicates where the species originated (e.g. wild, captive-bred, etc.). The letters in parentheses ('W', 'C', etc.) are the CITES source codes. For a full list of CITES source codes and their definitions, see <a href="http://www.cites.org/eng/res/12/12-03R14.shtml">Resolution Conf. 12.3 (Rev. CoP14)</a> on Permits and certificates.</p>
+    <p id="partnersglobaltooltipimporters">Provides an overview of the main importers according to the parameters selected.</p>
+    <p id="partnersnationaltooltipimporters">Provides an overview of the main importers from the country selected.</p>
+    <p id="partnersglobaltooltipexporters">Provides an overview of the main exporters according to the parameters selected.</p>
+    <p id="partnersnationaltooltipexporters">Provides an overview of the main direct exporters to the country selected.</p>
+    <p id="tradetermstooltip">Provides an overview of the top terms in trade for the group selected. Unless a unit of measurement (e.g. kg) is included with the trade term, it should be assumed that the trade represents number (e.g. number of live animals). For a full list of CITES term codes and their definitions, see  the <a href="http://www.cites.org/eng/notif/2006/E-ARguide.pdf">Guidelines for the preparation and submission of CITES annual reports</a> distributed by the Secretariat with Notification to the Parties 2006/030.</p>
+    <p id="appendixtooltip">Provides a break-down of the CITES Appendices for the wildlife parts and derivatives in trade.</p>
+    <p id="speciestooltip">Provides a list of the top ten species in trade</p>
+    <p id="familiestooltip">Provides a list of the top ten Families in trade</p>
+
+
+    <p id="reexportstooltip">As the rest of the dashboard only shows direct trade, this selection shows the quantities of animals and plants re-exported to and from the country selected. Top trading partners of re-exported wildlife to and from the country selected are also shown. </p>
+    <p id="occurrencetooltip">Provides an overview of species that occur in the country selected. Distribution information is based on information contained in the UNEP-WCMC database.</p>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var controller = <%= @controlpanel.class == NationalControlPanel ? "'national';" : "'global';" %>
+new Form.EventObserver('control_form', function(element, value) {showLoadingIcon(controller); new Ajax.Request(RAILS_ROOT+ '/' + controller + '/load_chart', {asynchronous:true, evalScripts:true, parameters:value })})
+
+function FireUpdate()
+{
+    new Ajax.Request(RAILS_ROOT+ '/' + controller + '/load_chart', {asynchronous:true, evalScripts:true, parameters:$('control_form').serialize() })
+}
+
+
+//]]>
+</script>

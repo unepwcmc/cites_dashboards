@@ -1,0 +1,5 @@
+  <div id="sources" class="parameters"><span class="label"><%= label :source, "Source:" %><a class="tooltip" href="#sourcetooltip" rel="#sourcetooltip" ><%= image_tag "information.png" %>
+	</a></span>
+    <%= @sources = SourceDetails.sources(@controlpanel.group)
+        select("controlpanel","source", "<option value='All'>All</option>" + options_from_collection_for_select(@sources, :last, :first,@controlpanel.source),{},{:onchange => "FireUpdate();"}) %>
+  </div>

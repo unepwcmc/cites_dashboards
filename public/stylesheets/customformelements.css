@@ -1,0 +1,63 @@
+.checkbox, .radio {
+    width: 50px;
+	height:50px;
+	padding: 0 0 0 0;
+	display: block;
+	clear: left;
+	float: left;
+    margin:0 9px 3px 9px;
+}
+#span_controlpanel_group_birds.radio {
+	background: url(../images/stack_parrot.gif) no-repeat;
+}
+
+#span_controlpanel_group_mammals.radio {
+	/*background: url(../images/stack_tiger.gif) no-repeat;*/
+    background: url(../images/stack_bear.gif) no-repeat;
+}
+
+#span_controlpanel_group_reptiles.radio {
+	background: url(../images/stack_gecko.gif) no-repeat;
+}
+
+#span_controlpanel_group_amphibians.radio {
+	background: url(../images/stack_frog.gif) no-repeat;
+}
+
+#span_controlpanel_group_fish.radio {
+	background: url(../images/stack_seahorse.gif) no-repeat;
+}
+
+#span_controlpanel_group_invertebrates_noncorals.radio {
+	background: url(../images/stack_butterfly.gif) no-repeat;
+}
+
+#span_controlpanel_group_corals.radio {
+	background: url(../images/stack_coral.gif) no-repeat;
+}
+
+#span_controlpanel_group_cacti.radio {
+	background: url(../images/stack_cacti.gif) no-repeat;
+}
+
+#span_controlpanel_group_orchids.radio {
+	background: url(../images/stack_orchid.gif) no-repeat;
+}
+
+#span_controlpanel_group_plants_excluding_cacti__orchids.radio {
+	background: url(../images/stack_plant.gif) no-repeat;
+}
+
+.checkbox {
+	background: url(../images/checkbox.gif) no-repeat;
+}
+.select {
+	position: absolute;
+	width: 158px; /* With the padding included, the width is 190 pixels: the actual width of the image. */
+	height: 21px;
+	padding: 0 24px 0 8px;
+	color: #fff;
+	font: 12px/21px arial,sans-serif;
+	background: url(../images/select.gif) no-repeat;
+	overflow: hidden;
+}

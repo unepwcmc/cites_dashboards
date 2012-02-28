@@ -1,0 +1,23 @@
+africa:
+  cites_region_code: 1
+  cites_region_name: Africa
+
+asia:
+  cites_region_code: 2
+  cites_region_name: Asia
+
+america:
+  cites_region_code: 3
+  cites_region_name: Central and South America and the Caribbean
+
+europe:
+  cites_region_code: 4
+  cites_region_name: Europe
+
+northamerica:
+  cites_region_code: 5
+  cites_region_name: North America
+
+oceania:
+  cites_region_code: 6
+  cites_region_name: Oceania

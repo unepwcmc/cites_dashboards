@@ -1,0 +1,59 @@
+<% content_for("banner") do -%>
+<!--<img src="../images/turtleBannerCropped.gif" alt="Banner Logo"/> -->
+<table width=100% border=0 cellpadding="0" cellspacing="0" height="95" >
+
+	<tr  height="98" valign="middle">
+		<td width="176">
+			<!-- <a href="http://www.cites.org/" target="_blank"><img src="../images/cites_colour.jpg" alt="CITES" width="120" height="75" border="0" align="left"> -->
+				<a href="http://www.cites.org/" target="_blank">
+					<%= image_tag "cites_colour.jpg", :alt => 'CITES',:width => "120",:height => "75",:border => "0", :align => "left" %>
+				</a>
+			</td>
+			<td align="center">
+				<p><FONT size="+1" face="Verdana, Arial, Helvetica, sans-serif" color="#006699"><b>CITES Trade Dashboard</b></FONT><br></p>
+			</td>
+			<td width="176">
+				<a href="http://www.unep-wcmc.org">
+					<!-- <img src="../images/unepwcmc_sml.gif" alt="UNEP-WCMC" width="120" height="67" border="0" align="right"> -->
+					<%= image_tag "unepwcmc_sml.gif", :alt => 'UNEP-WCMC',:width => "120",:height => "67",:border => "0", :align => "right" %>	
+				</a>
+			</td>
+		</tr>
+	</table>
+	<% end -%>
+
+	<div id="content" class="about">
+		<h2>About the Dashboards</h2>
+		<p>The CITES Trade Data Dashboards provide an interactive, dynamic way of viewing the trade data submitted by CITES Parties in their annual reports to the Convention. Two points of entry are provided:</p>
+		<ul>
+			<!-- <li>the <a href="/global">Global</a> Dashboard, which displays global trade trends by taxonomic group</li>
+			<li>the <a href="/national">National</a> Dashboard, which displays trade data by country or region</li> -->
+			<li>the <%= link_to "Global", global_path %> Dashboard, which displays global trade trends by taxonomic group</li>
+			<li>the <%= link_to "National", national_path %> Dashboard, which displays trade data by country or region</li>
+		</ul>
+		<h2>How to navigate the dashboards</h2>
+		<p>You can explore CITES trade data by making selections from the control panel on the right-hand side of the screen. You can select:</p>
+		<ul>
+			<li>the taxonomic group (e.g. mammals, birds, etc.)</li>
+			<li>the year range (in 5 year periods)</li>
+			<li>the source of the trade (e.g. wild, captive-bred, etc.)</li>
+			<li>the terms in trade (e.g. live, skins, etc).</li>
+		</ul>
+		<p>For the National Dashboard, the country can also be selected.</p>
+
+		<p>Once a selection is made, the graphs in the main viewing pane will dynamically update. These selections can be changed at any time by clicking on the variable of interest to the user.</p>
+		<p> The main viewing pane can also be changed by choosing options from "Select Data to Display" such as: "Trade volume over time"; "Top 10 trading partners", "Top 5 Terms" and "Trade by Source". Imports and exports can be viewed by selecting the relevant tab in the main viewing pane.</p>
+		<h2>Global Dashboard</h2>
+		<p>The Global Dashboard displays global trade trends by taxonomic group. It provides a way to see general trends in trade without the need to select which countries are involved, by viewing the data in seven different ways. The Global Dashboard includes data as reported by both trading partners (exporters and corresponding importers).</p>
+		<h2>National Dashboard</h2>
+		<p>The National Dashboard allows users to view information on the volumes of trade imported and exported by a particular country. In the National Dashboard, three additional country-specific options are available, including data on re-exports and information on species occurrence (linked to the <a href="http://www.cites.org/eng/resources/species.html">CITES species database</a>). The National Dashboard shows only the data reported by the country or countries selected by the user. The only exception is in the "Trade Volumes over Time" selection through which data provided by both trading partners can be viewed.</p>
+		<h2>Data Included</h2>
+		<p>The dashboards are a subset of the 10.5 million records within the CITES Trade Database, which is compiled from  CITES Parties annual reports. To simplify the graphics displayed through the dashboards, the dataset was restricted to:</p>
+		<ul>
+			<li>direct trade in Appendix I and II species except a) within the National Dashboard where users can specifically choose to look at re-exports for the country/region and b) within the "Appendix" view where data for Appendix III species can also be viewed;</li>
+			<li>trade reported as commercial, personal or hunting trophies (purpose codes T, P, and H); and </li>
+			<li>terms that are most commonly used in trade, with different trade term options available depending on which taxonomic group is selected. This is to minimise instances where the search criteria returns no data and to allow users to quickly see the most highly traded terms.</li>
+		</ul>
+		<p>Where appropriate, units were converted (e.g. grams to kilograms and kg of timber to m3 where conversion factors exist), to improve the analyses provided by the dashboard.</p>
+		<p>For more detailed queries of all CITES trade data, visit the <a href="http://www.unep-wcmc.org/citestrade/trade.cfm">CITES Trade Database</a>.</p>
+	</div>

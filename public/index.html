@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+    <style>
+        #head {
+            background:url("http://www.cites.org/eng/graphics/head.gif") no-repeat scroll left center #339900;
+            float:left;
+            height:57px;
+            margin:0;
+            padding:0;
+            top:0;
+            width:100%;
+        }
+        #menu {
+            background:none repeat scroll 0 0 #000099;
+            clear:both;
+            height:17px;
+            padding:0;
+            top:74px;
+            voice-family:inherit;
+         }
+        #footer {
+            text-align:center;
+            width:66%;
+            margin-top:16px;
+            }
+        #footer a:link, #footer a:visited {
+            background:none repeat scroll 0 0 #339900;
+            border:6px solid #FFFFFF;
+            color:#FFFFFF;
+            display:block;
+            font-family:Verdana,Arial,Helvetica,sans-serif;
+            font-size:10px;
+            font-weight:bold;
+            padding:3px;
+            text-align:center;
+            text-decoration:none;
+        }
+        #footer a:hover {
+            color:#FFFF33;
+        }
+
+        .wcmcfooter
+        {
+            color:gray;
+            text-align:center;
+        }
+
+        body { font-family: arial; font-size:12px; margin:0; }
+        #page { width:950px; margin:0 auto; color: #385d8a; }
+        .border img {float:left; margin-right:40px;}
+        #head img {float:right; margin-right:4px; margin-top:4px;}
+        h1 {text-align: center;margin:20px;}
+        h2, h3 {margin:0; }
+        h3 {font-weight: normal;}
+        select {margin-left: 20px;width:300px;}
+        .border {
+            background: #fff url("roundedbackground270white.png") no-repeat;
+            padding: 25px;
+            height: 230px;
+        }
+        .text {padding-top: 40px; font-size:16px}
+        .headgreen {
+            color:#339900;
+            font-size:17px;
+            font-weight:bold;
+            text-align:center;
+            margin-top:50px;
+            margin-bottom:15px;
+        }
+    </style>
+    <script type="text/javascript">
+        function Redirect(dashboard)
+        {
+            var value = document.getElementById(dashboard + 'select').value;
+            if (value.length > 0)
+                window.location = "/"+dashboard + "?id=" + escape(value);
+        }
+    </script>
+    <script type="text/javascript" src="http://www.cites.org/js/milonic_src.js"></script>
+    <script type="text/javascript">
+    <!--
+        if(ns4) _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenuns4.js><\/script>");
+        else _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenudom.js><\/script>");
+    -->
+    </script>
+    <script type="text/javascript" src="http://www.cites.org/eng/ref/menu_data.js"></script>
+</head>
+<body>
+<div id="banner">
+    <div id="head"> </div>
+    <div id="menu"></div>
+</div>
+<div id="page">
+    <div class="headgreen">CITES Trade Data Dashboards</div>
+    <div class="border">
+    <img src="trademap.jpg" alt="Map logo"  title=""/>
+    <div class="text">
+        <h2>National Dashboard</h2>
+        <h3>Displays trade trends by country</h3>
+        <p>Select a country from the drop down list to explore trade trends:	     </p>
+        <select id="nationalselect" onchange="Redirect('national')">
+        <option value="" selected="true"> Select a Country</option>
+        <option value="AF">Afghanistan</option>
+        <option value="AL">Albania</option>
+        <option value="DZ">Algeria</option>
+        <option value="AD">Andorra</option>
+        <option value="AO">Angola</option>
+        <option value="AI">Anguilla</option>
+        <option value="AG">Antigua and Barbuda</option>
+        <option value="AR">Argentina</option>
+        <option value="AM">Armenia</option>
+        <option value="AU">Australia</option>
+        <option value="AT">Austria</option>
+        <option value="AZ">Azerbaijan</option>
+        <option value="BS">Bahamas</option>
+        <option value="BH">Bahrain</option>
+        <option value="BD">Bangladesh</option>
+        <option value="BB">Barbados</option>
+        <option value="BY">Belarus</option>
+        <option value="BE">Belgium</option>
+        <option value="BZ">Belize</option>
+        <option value="BJ">Benin</option>
+        <option value="BT">Bhutan</option>
+        <option value="BO">Bolivia (Plurinational State of)</option>
+        <option value="BA">Bosnia and Herzegovina</option>
+        <option value="BW">Botswana</option>
+        <option value="BR">Brazil</option>
+        <option value="BN">Brunei Darussalam</option>
+        <option value="BG">Bulgaria</option>
+        <option value="BF">Burkina Faso</option>
+        <option value="BI">Burundi</option>
+        <option value="KH">Cambodia</option>
+        <option value="CM">Cameroon</option>
+        <option value="CA">Canada</option>
+        <option value="CV">Cape Verde</option>
+        <option value="CF">Central African Republic</option>
+        <option value="TD">Chad</option>
+        <option value="CL">Chile</option>
+        <optgroup label="China and its territories">
+            <option value="CN">China</option>
+            <option value="HK" class="indent" >Hong Kong, Special Administrative Region of China </option>
+            <option value="MO" class="indent" >Macao Special Administrative Region of China</option>
+            <option value="TW" class="indent" >Taiwan, Province of China</option>
+        </optgroup>
+        <option value="CO">Colombia</option>
+        <option value="KM">Comoros</option>
+        <option value="CG">Congo, Republic of</option>
+        <option value="CK">Cook Islands</option>
+        <option value="CR">Costa Rica</option>
+        <option value="HR">Croatia</option>
+        <option value="CU">Cuba</option>
+        <option value="CY">Cyprus</option>
+        <option value="CZ">Czech Republic</option>
+        <option value="CI">C&#244;te d'Ivoire</option>
+        <option value="KP">Democratic People's Republic of Korea</option>
+        <option value="CD">Democratic Republic of the Congo</option>
+        <optgroup label="Denmark and its territories">
+            <option value="DK">Denmark</option>
+            <option value="GL" class="indent" >Greenland</option>
+        </optgroup>
+        <option value="DJ">Djibouti</option>
+        <option value="DM">Dominica</option>
+        <option value="DO">Dominican Republic</option>
+        <option value="EC">Ecuador</option>
+        <option value="EG">Egypt</option>
+        <option value="SV">El Salvador</option>
+        <option value="GQ">Equatorial Guinea</option>
+        <option value="ER">Eritrea</option>
+        <option value="EE">Estonia</option>
+        <option value="ET">Ethiopia</option>
+        <option value="FO">Faroe Islands</option>
+        <option value="FJ">Fiji</option>
+        <option value="FI">Finland</option>
+        <optgroup label="France and its territories">
+            <option value="FR">France</option>
+            <option value="CP" class="indent" >Clipperton</option>
+            <option value="GF" class="indent" >French Guiana</option>
+            <option value="PF" class="indent" >French Polynesia</option>
+            <option value="GP" class="indent" >Guadeloupe</option>
+            <option value="MQ" class="indent" >Martinique</option>
+            <option value="YT" class="indent" >Mayotte</option>
+            <option value="NC" class="indent" >New Caledonia</option>
+            <option value="RE" class="indent" >R&#233;union</option>
+            <option value="TF" class="indent" >Southern and Antarctic Territories</option>
+            <option value="BL" class="indent" >St. Bartelemy</option>
+            <option value="MF" class="indent" >St. Martin </option>
+            <option value="WF" class="indent" >Wallis & Futuna Islands</option>
+        </optgroup>
+        <option value="GA">Gabon</option>
+        <option value="GM">Gambia</option>
+        <option value="GE">Georgia</option>
+        <option value="DE">Germany</option>
+        <option value="GH">Ghana</option>
+        <option value="GR">Greece</option>
+        <option value="GD">Grenada</option>
+        <option value="GT">Guatemala</option>
+        <option value="GN">Guinea</option>
+        <option value="GW">Guinea-Bissau</option>
+        <option value="GY">Guyana</option>
+        <option value="HT">Haiti</option>
+        <option value="VA">Holy See</option>
+        <option value="HN">Honduras</option>
+        <option value="HU">Hungary</option>
+        <option value="IS">Iceland</option>
+        <option value="IN">India</option>
+        <option value="ID">Indonesia</option>
+        <option value="IR">Iran (Islamic Republic of)</option>
+        <option value="IQ">Iraq</option>
+        <option value="IE">Ireland</option>
+        <option value="IL">Israel</option>
+        <option value="IT">Italy</option>
+        <option value="JM">Jamaica</option>
+        <option value="JP">Japan</option>
+        <option value="JO">Jordan</option>
+        <option value="KZ">Kazakhstan</option>
+        <option value="KE">Kenya</option>
+        <option value="KI">Kiribati</option>
+        <option value="KW">Kuwait</option>
+        <option value="KG">Kyrgyzstan</option>
+        <option value="LA">Lao People's Democratic Republic</option>
+        <option value="LV">Latvia</option>
+        <option value="LB">Lebanon</option>
+        <option value="LS">Lesotho</option>
+        <option value="LR">Liberia</option>
+        <option value="LY">Libyan Arab Jamahiriya</option>
+        <option value="LI">Liechtenstein</option>
+        <option value="LT">Lithuania</option>
+        <option value="LU">Luxembourg</option>
+        <option value="MG">Madagascar</option>
+        <option value="MW">Malawi</option>
+        <option value="MY">Malaysia</option>
+        <option value="MV">Maldives</option>
+        <option value="ML">Mali</option>
+        <option value="MT">Malta</option>
+        <option value="MH">Marshall Islands </option>
+        <option value="MR">Mauritania</option>
+        <option value="MU">Mauritius</option>
+        <option value="MX">Mexico</option>
+        <option value="FM">Micronesia (Federated States of)</option>
+        <option value="MC">Monaco</option>
+        <option value="MN">Mongolia</option>
+        <option value="ME">Montenegro</option>
+        <option value="MA">Morocco</option>
+        <option value="MZ">Mozambique</option>
+        <option value="MM">Myanmar</option>
+        <option value="NA">Namibia</option>
+        <option value="NR">Nauru</option>
+        <option value="NP">Nepal</option>
+        <optgroup label="Netherlands and its territories">
+            <option value="NL">Netherlands</option>
+            <option value="AW" class="indent" >Aruba</option>
+            <option value="AN" class="indent" >Netherlands Antilles</option>
+        </optgroup>
+        <option value="NZ">New Zealand</option>
+        <option value="NI">Nicaragua</option>
+        <option value="NE">Niger</option>
+        <option value="NG">Nigeria</option>
+        <option value="NU">Niue</option>
+        <option value="NO">Norway</option>
+        <option value="OM">Oman</option>
+        <option value="PK">Pakistan</option>
+        <option value="PW">Palau</option>
+        <option value="PA">Panama</option>
+        <option value="PG">Papua New Guinea</option>
+        <option value="PY">Paraguay</option>
+        <option value="PE">Peru</option>
+        <option value="PH">Philippines</option>
+        <option value="PL">Poland</option>
+        <option value="PT">Portugal</option>
+        <option value="QA">Qatar</option>
+        <option value="KR">Republic of Korea</option>
+        <option value="MD">Republic of Moldova</option>
+        <option value="RO">Romania</option>
+        <option value="RU">Russian Federation</option>
+        <option value="RW">Rwanda</option>
+        <option value="KN">Saint Kitts and Nevis</option>
+        <option value="LC">Saint Lucia</option>
+        <option value="VC">Saint Vincent and the Grenadines</option>
+        <option value="WS">Samoa</option>
+        <option value="SM">San Marino</option>
+        <option value="ST">Sao Tome and Principe</option>
+        <option value="SA">Saudi Arabia</option>
+        <option value="SN">Senegal</option>
+        <option value="RS">Serbia</option>
+        <option value="SC">Seychelles</option>
+        <option value="SL">Sierra Leone</option>
+        <option value="SG">Singapore</option>
+        <option value="SK">Slovakia</option>
+        <option value="SI">Slovenia</option>
+        <option value="SB">Solomon Islands</option>
+        <option value="SO">Somalia</option>
+        <option value="ZA">South Africa</option>
+        <option value="ES">Spain</option>
+        <option value="LK">Sri Lanka</option>
+        <option value="SD">Sudan</option>
+        <option value="SR">Suriname</option>
+        <option value="SZ">Swaziland</option>
+        <option value="SE">Sweden</option>
+        <option value="CH">Switzerland</option>
+        <option value="SY">Syrian Arab Republic</option>
+        <option value="TJ">Tajikistan</option>
+        <option value="TZ">Tanzania, United Republic of</option>
+        <option value="TH">Thailand</option>
+        <option value="MK">The former Yugoslav Republic of Macedonia</option>
+        <option value="TL">Timor-Leste</option>
+        <option value="TG">Togo</option>
+        <option value="TO">Tonga</option>
+        <option value="TT">Trinidad and Tobago</option>
+        <option value="TN">Tunisia</option>
+        <option value="TR">Turkey</option>
+        <option value="TM">Turkmenistan</option>
+        <option value="TC">Turks and Caicos Islands</option>
+        <option value="TV">Tuvalu</option>
+        <option value="UG">Uganda</option>
+        <option value="UA">Ukraine</option>
+        <option value="AE">United Arab Emirates</option>
+        <optgroup label="United Kingdom of Great Britain and Northern Ireland and its territories">
+            <option value="GB">United Kingdom of Great Britain and Northern Ireland</option>
+            <option value="BM" class="indent" >Bermuda</option>
+            <option value="IO" class="indent" >British Indian Ocean Territory</option>
+            <option value="VG" class="indent" >British Virgin Islands</option>
+            <option value="KY" class="indent" >Cayman Islands</option>
+            <option value="FK" class="indent" >Falkland Islands</option>
+            <option value="GI" class="indent" >Gibraltar</option>
+            <option value="GG" class="indent" >Guernsey</option>
+            <option value="IM" class="indent" >Isle of Man</option>
+            <option value="JE" class="indent" >Jersey</option>
+            <option value="MS" class="indent" >Montserrat</option>
+            <option value="PN" class="indent" >Pitcairn Islands</option>
+            <option value="SH" class="indent" >St Helena & Dependencies</option>
+        </optgroup>
+        <optgroup label="United States of America and its territories">
+            <option value="US">United States of America</option>
+            <option value="AS" class="indent" >American Samoa</option>
+            <option value="GU" class="indent" >Guam</option>
+            <option value="MP" class="indent" >Northern Mariana Islands</option>
+            <option value="PR" class="indent" >Puerto Rico</option>
+            <option value="VI" class="indent" >Virgin Islands of the USA</option>
+        </optgroup>
+        <option value="UY">Uruguay</option>
+        <option value="UZ">Uzbekistan</option>
+        <option value="VU">Vanuatu</option>
+        <option value="VE">Venezuela (Bolivarian Republic of)</option>
+        <option value="VN">Viet Nam</option>
+        <option value="YE">Yemen</option>
+        <option value="ZM">Zambia</option>
+        <option value="ZW">Zimbabwe</option>
+        </select>
+    </div>
+    </div>
+    <div class="border">
+        <img src="entryStack2.jpg" alt="Species logo" title=""/>
+        <div class="text">
+            <h2>Global Dashboard</h2>
+            <h3>Displays global trade trends by taxonomic group</h3>
+            <p>
+                Select a taxonomic group from the drop down list to explore trade trends:
+            </p>
+            <select id="globalselect" onchange="Redirect('global')">
+                <option value="">Select a Group</option>
+                <option value="Mammals">Mammals</option>
+                <option value="Birds">Birds</option>
+                <option value="Reptiles">Reptiles</option>
+                <option value="Amphibians">Amphibians</option>
+                <option value="Fish">Fish</option>
+                <option value="Invertebrates (non-corals)">Invertebrates (non-corals)</option>
+                <option value="Corals">Corals</option>
+                <option value="Plants (excluding cacti &amp; orchids)">Plants (excluding cacti &amp; orchids)</option>
+                <option value="Orchids">Orchids</option>
+                <option value="Cacti">Cacti</option>
+            </select>
+        </div>
+    </div>
+    <div class="wcmcfooter">This facility was developed and is maintained by UNEP-WCMC for the CITES Secretariat. <img src="unep-wcmc.gif" alt="WCMC logo" align="middle"/></div>
+</div>
+
+<table align="center" id="footer" >
+<tr height="16">
+    <td width="25%"><a href="http://www.cites.org/eng/site_map.shtml" target=_top>Site map</a></td>
+    <td width="25%"><a href="http://www.cites.org/eng/resources/site_search.shtml" target=_top>Search the site</a></td>
+    <td width="25%"><a href="http://www.cites.org/eng/contact.shtml" target=_top>FAQ & contact us</a></td>
+    <td width="25%"><a href="http://www.cites.org/index.html" target=_top>Home</a>
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>

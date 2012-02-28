@@ -1,0 +1,257 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+/*fieldset*/, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+    margin:0;
+    font-family:arial,sans-serif;
+    font-size:12px
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+.h1
+{
+    font-size:150%;
+    font-weight:bold;
+    line-height: 40px;
+}
+
+.h2
+{
+    font-size:125%;
+    font-weight:bold;
+}
+
+.parameters
+{
+    margin-bottom:10px;
+}
+
+
+a img
+ {
+    border: none;
+ }
+
+#page
+{
+    width:950px;
+    margin:auto;
+    margin-bottom:55px;
+    font: 1.1em/1 arial,sans-serif;
+}
+
+#label
+{
+    text-align:center;
+    line-height: 1;
+    padding:0;
+    margin:0;
+}
+
+#parameters .label
+{
+    width:6em;
+    float:left;
+}
+
+#parameters select
+{
+    width:12em;
+}
+
+#results
+{
+    float:left;
+    width:70% ;
+}
+
+#control_panel
+{
+    float:right;
+    width:29%;
+}
+
+#contentfieldset
+{
+    padding:8px 0 15px 0px;
+}
+
+#contentfieldset legend
+{
+    margin-left:50px; 
+}
+UL.gallery
+{
+  /*line-height: 21px;*/
+  padding-left:20px;
+}
+
+UL.gallery li {
+        display: inline;
+        list-style: none;
+        width: 68px;
+        min-height: 40px;
+        float: left;
+        /*margin: 0 10px 10px 0;*/
+        padding:3px 3px 6px 3px;
+        text-align: center;
+	}
+
+/*UL.gallery li.display {
+    margin-left: -10px;
+    width:100px;
+    line-height:1;
+}  */
+
+UL.gallery li div {
+    display:inline-block;
+    padding: 3px;
+}
+
+.tabbar
+{
+    border-bottom: solid 4px #8bbdd4; /*#e1edf5*/
+}
+
+.tab
+{
+    padding:2px;
+    /*margin-top:10px;*/
+    background: url(../images/roundedtabbarinverted.gif) no-repeat;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/*#google-visualization-geomap-0 */
+#map
+{
+    border:ridge 4px;
+    width:556px;
+    height:347px;
+    margin-left:50px;
+}
+
+
+.about  p
+{
+    margin:10px 0;
+}
+
+.about h2
+{
+    border:none;
+    margin:0;
+    padding:5px 0;
+}
+#wcmcfooter
+{
+    clear:both;
+    color:gray;
+}
+
+#wcmcfooter div.left
+{
+    float:left;
+}
+
+#wcmcfooter div.middle
+{
+    float:left;
+    width:840px;
+    text-align:center
+}
+
+#chart
+{
+    text-align:center;
+}
+
+.phylum
+{
+    margin-left:30px;
+    margin-top: 20px;
+}
+
+.class
+{
+    margin-left:40px;
+    margin-top: 20px;
+}
+
+.order
+{
+    margin-left:50px;
+    margin-top: 15px;
+}
+
+.family
+{
+    margin-left:70px;
+    margin-top: 10px;
+}
+
+.species
+{
+    margin-left:90px;
+}
+
+a.tooltip
+{
+    vertical-align:middle;
+}
+
+#datadisplay legend a.tooltip img
+{
+    top: 0px;
+}
+
+.about li
+{
+    list-style-type:disc;
+}

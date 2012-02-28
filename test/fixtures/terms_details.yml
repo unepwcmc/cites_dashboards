@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  [term_code: MyString
+  english_term_name: MyString
+  english_explanation: MyString
+  french_term_name: MyString
+  spanish_term_name: 
+
+two:
+  [term_code: MyString
+  english_term_name: MyString
+  english_explanation: MyString
+  french_term_name: MyString
+  spanish_term_name: 
