@@ -1,9 +1,11 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
-
+set :application, "cites_dashboard"
 set :repository, "git@github.com:unepwcmc/cites_dashboards"
+
 set :scm, :git
 set :scm_username, "unepwcmc-read"
+
+# Target directory for the application on the web and app servers.
+set(:deploy_to) { File.join("", "home", user, "webapps", application) }
 
 # Primary domain name of your application. Used in the Apache configs
 set :domain, "unepwcmc-001.vm.brightbox.net"
