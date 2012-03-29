@@ -125,13 +125,11 @@ a img
 {
     margin-left:50px; 
 }
-UL.gallery
-{
-  /*line-height: 21px;*/
-  padding-left:20px;
+ul.gallery {
+  padding-left:9px;
 }
 
-UL.gallery li {
+ul.gallery li {
         display: inline;
         list-style: none;
         width: 68px;
@@ -148,7 +146,7 @@ UL.gallery li {
     line-height:1;
 }  */
 
-UL.gallery li div {
+ul.gallery li div {
     display:inline-block;
     padding: 3px;
 }

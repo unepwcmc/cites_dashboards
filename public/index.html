@@ -1,99 +1,79 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
-    <style>
-        #head {
-            background:url("http://www.cites.org/eng/graphics/head.gif") no-repeat scroll left center #339900;
-            float:left;
-            height:57px;
-            margin:0;
-            padding:0;
-            top:0;
-            width:100%;
-        }
-        #menu {
-            background:none repeat scroll 0 0 #000099;
-            clear:both;
-            height:17px;
-            padding:0;
-            top:74px;
-            voice-family:inherit;
-         }
-        #footer {
-            text-align:center;
-            width:66%;
-            margin-top:16px;
-            }
-        #footer a:link, #footer a:visited {
-            background:none repeat scroll 0 0 #339900;
-            border:6px solid #FFFFFF;
-            color:#FFFFFF;
-            display:block;
-            font-family:Verdana,Arial,Helvetica,sans-serif;
-            font-size:10px;
-            font-weight:bold;
-            padding:3px;
-            text-align:center;
-            text-decoration:none;
-        }
-        #footer a:hover {
-            color:#FFFF33;
-        }
-
-        .wcmcfooter
-        {
-            color:gray;
-            text-align:center;
-        }
-
-        body { font-family: arial; font-size:12px; margin:0; }
-        #page { width:950px; margin:0 auto; color: #385d8a; }
-        .border img {float:left; margin-right:40px;}
-        #head img {float:right; margin-right:4px; margin-top:4px;}
-        h1 {text-align: center;margin:20px;}
-        h2, h3 {margin:0; }
-        h3 {font-weight: normal;}
-        select {margin-left: 20px;width:300px;}
-        .border {
-            background: #fff url("roundedbackground270white.png") no-repeat;
-            padding: 25px;
-            height: 230px;
-        }
-        .text {padding-top: 40px; font-size:16px}
-        .headgreen {
-            color:#339900;
-            font-size:17px;
-            font-weight:bold;
-            text-align:center;
-            margin-top:50px;
-            margin-bottom:15px;
-        }
-    </style>
-    <script type="text/javascript">
-        function Redirect(dashboard)
-        {
-            var value = document.getElementById(dashboard + 'select').value;
-            if (value.length > 0)
-                window.location = "/"+dashboard + "?id=" + escape(value);
-        }
-    </script>
-    <script type="text/javascript" src="http://www.cites.org/js/milonic_src.js"></script>
-    <script type="text/javascript">
-    <!--
-        if(ns4) _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenuns4.js><\/script>");
-        else _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenudom.js><\/script>");
-    -->
-    </script>
-    <script type="text/javascript" src="http://www.cites.org/eng/ref/menu_data.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>CITES Trade Data Dashboards</title>
+  <link rel="stylesheet" media="all" type="text/css" href="/style/base.css" />
+  <style>
+    #menu {
+        background:none repeat scroll 0 0 #000099;
+        clear:both;
+        height:17px;
+        padding:0;
+        top:74px;
+        voice-family:inherit;
+     }
+    .wcmcfooter {
+        color:gray;
+        text-align:center;
+    }
+    body { font-family: arial; font-size:12px; margin:0; }
+    #page { width:950px; margin:0 auto; color: #385d8a; }
+    .border img {float:left; margin-right:40px;}
+    #head img {float:right; margin-right:4px; margin-top:4px;}
+    h1 {text-align: center;margin:20px;}
+    h2, h3 {margin:0; }
+    h3 {font-weight: normal;}
+    select {margin-left: 20px;width:300px;}
+    .border {
+        background: #fff url("roundedbackground270white.png") no-repeat;
+        padding: 25px;
+        height: 230px;
+    }
+    .text {padding-top: 40px; font-size:16px}
+    .headgreen {
+        color:#339900;
+        font-size:17px;
+        font-weight:bold;
+        text-align:center;
+        margin-top:50px;
+        margin-bottom:15px;
+    }
+  </style>
+  <script type="text/javascript">
+    function Redirect(dashboard) {
+      var value = document.getElementById(dashboard + 'select').value;
+      if (value.length > 0) {
+        window.location = "/"+dashboard + "?id=" + escape(value);
+      }
+    }
+  </script>
 </head>
-<body>
-<div id="banner">
-    <div id="head"> </div>
-    <div id="menu"></div>
-</div>
-<div id="page">
-    <div class="headgreen">CITES Trade Data Dashboards</div>
+<body class="markeeta"> 
+<div id="outer"> 
+<div id="container"> 
+<!-- include("http://www.cites.org/eng/inc/header.php"); -->
+<script type="text/javascript" src="/js/milonic_src.js"></script>
+<script type="text/javascript">
+<!--
+if(ns4)_d.write("<script language=JavaScript src=http://www.cites.org/js/mmenuns4.js><\/script>");
+else _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenudom.js><\/script>");
+-->
+</script>
+<script type="text/javascript" src="http://www.cites.org/eng/inc/menu_data.js"></script>
+<div id="header">
+<!-- end #header --></div>
+<div id="menutop">
+<div id="search">  
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<form method="get" action="http://www.cites.org/eng/results.php">
+  <input name="cites" type="text" size="40" placeholder="search CITES.org" />
+</form>
+  <!-- end #search --></div>
+  <!-- end #menutop --></div>
+<!-- end include -->
+<div id="milieu">
+    <h1>CITES Trade Data Dashboards</h1>
     <div class="border">
     <img src="trademap.jpg" alt="Map logo"  title=""/>
     <div class="text">
@@ -186,7 +166,7 @@
             <option value="TF" class="indent" >Southern and Antarctic Territories</option>
             <option value="BL" class="indent" >St. Bartelemy</option>
             <option value="MF" class="indent" >St. Martin </option>
-            <option value="WF" class="indent" >Wallis & Futuna Islands</option>
+            <option value="WF" class="indent" >Wallis &amp; Futuna Islands</option>
         </optgroup>
         <option value="GA">Gabon</option>
         <option value="GM">Gambia</option>
@@ -329,7 +309,7 @@
             <option value="JE" class="indent" >Jersey</option>
             <option value="MS" class="indent" >Montserrat</option>
             <option value="PN" class="indent" >Pitcairn Islands</option>
-            <option value="SH" class="indent" >St Helena & Dependencies</option>
+            <option value="SH" class="indent" >St Helena &amp; Dependencies</option>
         </optgroup>
         <optgroup label="United States of America and its territories">
             <option value="US">United States of America</option>
@@ -374,17 +354,13 @@
         </div>
     </div>
     <div class="wcmcfooter">This facility was developed and is maintained by UNEP-WCMC for the CITES Secretariat. <img src="unep-wcmc.gif" alt="WCMC logo" align="middle"/></div>
-</div>
-
-<table align="center" id="footer" >
-<tr height="16">
-    <td width="25%"><a href="http://www.cites.org/eng/site_map.shtml" target=_top>Site map</a></td>
-    <td width="25%"><a href="http://www.cites.org/eng/resources/site_search.shtml" target=_top>Search the site</a></td>
-    <td width="25%"><a href="http://www.cites.org/eng/contact.shtml" target=_top>FAQ & contact us</a></td>
-    <td width="25%"><a href="http://www.cites.org/index.html" target=_top>Home</a>
-
-    </td>
-  </tr>
-</table>
+<!-- end #milieu --></div>
+<!-- include("http://www.cites.org/eng/inc/footer.php"); -->
+<div id="footer"><p><a href="/eng/disclaimer.php">Disclaimer</a>&nbsp;  &nbsp;|&nbsp; <a href="/eng/contact.php">Contact us</a>&nbsp;  |&nbsp; <a href="/eng/resources/faq.php">FAQs</a></p>
+<!-- end #footer --></div>
+<script id="aptureScript" type="text/javascript" src="http://www.apture.com/js/apture.js?siteToken=Xg9j6uU" charset="utf-8"></script>
+<!-- end include -->
+<!-- end #container --></div>
+<!-- end #outer --></div>
 </body>
 </html>
