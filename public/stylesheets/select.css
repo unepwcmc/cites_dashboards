@@ -9,7 +9,7 @@
     border:1px solid #7F9DB9;
     /*    color:green;
         padding-right:1em;*/
-    width:10.5em;
+    width:11.5em;
     margin-left:6em;
     display:block;
     padding:1px 18px 3px 4px;
@@ -17,6 +17,11 @@
     text-decoration:none;
     color:black;
 }
+a.trigger, a.activetrigger {
+  text-decoration: none;
+  color: black;
+}
+
 .trigger{
     /*position:relative;*/
 }
