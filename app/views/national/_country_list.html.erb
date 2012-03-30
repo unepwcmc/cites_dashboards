@@ -1,5 +1,5 @@
 <% countries = TradingCountry.find(:all, :conditions => "exclude_from_selection = false").sort{|a,b| a.name <=> b.name} %>
-<select name="controlpanel[country]" id="controlpanel_country" class="turnintodropdown">
+<select name="controlpanel[country]" id="controlpanel_country">
 <% countries.each { |c|%>
   <% if c.dependency_of == nil %>
       <% dependencies = c.dependent_territories.sort{|a,b| a.name <=> b.name}%>
