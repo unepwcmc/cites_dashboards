@@ -1,4 +1,10 @@
+## Generated with 'brightbox' on 2012-03-13 16:12:26 +0000
+gem 'brightbox', '>=2.3.9'
+require 'brightbox/recipes'
+require 'brightbox/passenger'
+
 set :application, "cites_dashboard"
+set :user, "rails"
 set :repository, "git@github.com:unepwcmc/cites_dashboards"
 
 set :scm, :git
@@ -34,9 +40,29 @@ set :branch, "master"
 # The shared area is prepared with 'deploy:setup' and all the shared
 # items are symlinked in when the code is updated.
 # set :local_shared_dirs, %w(public/upload)
-# set :local_shared_files, %w(config/database.yml)
-set :global_shared_dirs, %w(public/system)
-set :global_shared_files, %w(config/database.yml)
+set :local_shared_files, %w(config/database.yml)
+
+## Global Shared Area
+# These are the list of files and directories that you want
+# to share between all releases of your application across all servers.
+# For it to work you need a directory on a network file server shared
+# between all your servers. Specify the path to the root of that area
+# in :global_shared_path. Defaults to the same value as :shared_path.
+# set :global_shared_path, "/srv/share/myapp"
+#
+# NOTE: local areas trump global areas, allowing you to have some
+# servers using local assets if required.
+#
+# Beyond that it is the same as the local shared area.
+# So if you have an 'upload' directory in public, add 'public/upload'
+# to the :global_shared_dirs array.
+# If you want to share the database.yml add 'config/database.yml'
+# to the :global_shared_files array.
+#
+# The shared area is prepared with 'deploy:setup' and all the shared
+# items are symlinked in when the code is updated.
+# set :global_shared_dirs, %w(public/upload)
+# set :global_shared_files, %w(config/database.yml)
 
 # Forces a Pty so that svn+ssh repository access will work. You
 # don't need this if you are using a different SCM system. Note that
