@@ -15,7 +15,8 @@ class GlobalControlPanel
 
     startdate = max
     while startdate >=  min
-      enddate = startdate-gap
+      enddate = startdate - gap
+      enddate = min if enddate < min
       @range[startdate.to_s] = {'enddate' => startdate, 'description' => (enddate >= min ? enddate : min).to_s + "-" + startdate.to_s , 'startdate' => enddate}
       startdate -= gap+1
     end
