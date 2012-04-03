@@ -1,7 +1,10 @@
 ## Generated with 'brightbox' on 2012-03-13 16:12:26 +0000
 gem 'brightbox', '>=2.3.9'
+require 'capistrano/ext/multistage'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
+
+set :default_stage, 'staging'
 
 set :application, "cites_dashboard"
 set :user, "rails"
@@ -12,14 +15,6 @@ set :scm_username, "unepwcmc-read"
 
 # Target directory for the application on the web and app servers.
 set(:deploy_to) { File.join("", "home", user, "webapps", application) }
-
-# Primary domain name of your application. Used in the Apache configs
-set :domain, "unepwcmc-001.vm.brightbox.net"
-
-## List of servers
-server "unepwcmc-001.vm.brightbox.net", :app, :web, :db, :primary => true
-
-set :branch, "master"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
