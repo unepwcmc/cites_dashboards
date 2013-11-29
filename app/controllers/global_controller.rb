@@ -4,7 +4,7 @@ class GlobalController < SharedController
       @controlpanel = session[:controlpanel]
     else
       @controlpanel = GlobalControlPanel.new({:group=> params[:id] != nil ? params[:id] : "Mammals",
-                                              :date_range=>"2008",
+                                              :date_range=>"2011",
                                               :term=>GroupTerm.default(params[:id] != nil ? params[:id] : "Mammals"),
                                               :source=>'All',
                                               :display=>"Time",
