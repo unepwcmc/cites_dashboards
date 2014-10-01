@@ -15,14 +15,14 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
             unit_code_1 ORDER BY quantity_1 DESC, taxon_family) AS pos
      FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-				    WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-				    WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-				    WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-				    WHEN shipment_year BETWEEN 1986 AND 1990  THEN 1990
-				    WHEN shipment_year BETWEEN 1981 AND 1985  THEN 1985
-				    WHEN shipment_year BETWEEN 1976 AND 1980  THEN 1980
-				    WHEN shipment_year BETWEEN 1975 AND 1975  THEN 1975
+				    WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+				    WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+				    WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+				    WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+				    WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+				    WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+				    WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+				    WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
           END as shipment_year,
           'Global' as import_country_code, 'Global' as export_country_code,
@@ -56,14 +56,14 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
             unit_code_1, source_code ORDER BY quantity_1 DESC, taxon_family) AS pos
                FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-				    WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-				    WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-				    WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-				    WHEN shipment_year BETWEEN 1986 AND 1990  THEN 1990
-				    WHEN shipment_year BETWEEN 1981 AND 1985  THEN 1985
-				    WHEN shipment_year BETWEEN 1976 AND 1980  THEN 1980
-				    WHEN shipment_year BETWEEN 1975 AND 1975  THEN 1975
+                WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+                WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+                WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+                WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+                WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+                WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+                WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+                WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
 		END as shipment_year,
 		'Global' as import_country_code, 'Global' as export_country_code,
@@ -95,13 +95,14 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
             unit_code_1,import_country_code ORDER BY quantity_1 DESC, taxon_family) AS pos
      FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
-				    WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
-				    WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
-				    WHEN shipment_year BETWEEN 1989 AND 1993  THEN 1993
-				    WHEN shipment_year BETWEEN 1984 AND 1988  THEN 1988
-				    WHEN shipment_year BETWEEN 1979 AND 1983  THEN 1983
-				    WHEN shipment_year BETWEEN 1974 AND 1978  THEN 1978
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+            WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+            WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+            WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
 		END as shipment_year,
 		import_country_code, 'N/A' as export_country_code,
@@ -132,13 +133,14 @@ FROM
         rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
         unit_code_1,export_country_code ORDER BY quantity_1 DESC, taxon_family) AS pos
      FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
-				    WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
-				    WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
-				    WHEN shipment_year BETWEEN 1989 AND 1993  THEN 1993
-				    WHEN shipment_year BETWEEN 1984 AND 1988  THEN 1988
-				    WHEN shipment_year BETWEEN 1979 AND 1983  THEN 1983
-				    WHEN shipment_year BETWEEN 1974 AND 1978  THEN 1978
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+            WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+            WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+            WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
 		END as shipment_year,
 		'N/A' as import_country_code,export_country_code,
@@ -169,13 +171,14 @@ FROM
     rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1,
     import_country_code,source_code ORDER BY quantity_1 DESC, taxon_family) AS pos
      FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
-				    WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
-				    WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
-				    WHEN shipment_year BETWEEN 1989 AND 1993  THEN 1993
-				    WHEN shipment_year BETWEEN 1984 AND 1988  THEN 1988
-				    WHEN shipment_year BETWEEN 1979 AND 1983  THEN 1983
-				    WHEN shipment_year BETWEEN 1974 AND 1978  THEN 1978
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+            WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+            WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+            WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
 		END as shipment_year,
 		import_country_code, 'N/A' as export_country_code,
@@ -206,13 +209,14 @@ FROM
     rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1,
     export_country_code,source_code ORDER BY quantity_1 DESC, taxon_family) AS pos
      FROM (SELECT reporter_type, CASE
-				    WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
-				    WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
-				    WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
-				    WHEN shipment_year BETWEEN 1989 AND 1993  THEN 1993
-				    WHEN shipment_year BETWEEN 1984 AND 1988  THEN 1988
-				    WHEN shipment_year BETWEEN 1979 AND 1983  THEN 1983
-				    WHEN shipment_year BETWEEN 1974 AND 1978  THEN 1978
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991  THEN 1991
+            WHEN shipment_year BETWEEN 1982 AND 1986  THEN 1986
+            WHEN shipment_year BETWEEN 1977 AND 1981  THEN 1981
+            WHEN shipment_year BETWEEN 1975 AND 1976  THEN 1976
 				    ELSE 1900
 		END as shipment_year,
 		'N/A' as import_country_code, export_country_code,
@@ -247,7 +251,7 @@ from national_detail n
 	inner join group_terms on cites_taxon_codes.taxon_group = group_terms.taxon_group and
     n.term_code_1 =  group_terms.term_code
 	and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2011
+where n.shipment_year < 2012
   and EXISTS (SELECT * FROM top_families where top_families.taxon_family = cites_taxon_codes.taxon_family
   and n.shipment_year BETWEEN top_families.shipment_year - 5 and top_families.shipment_year)
 group by n.shipment_year,appendix,origin_country_code,n.reporter_type,n.import_country_code,
