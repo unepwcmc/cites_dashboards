@@ -1,7 +1,7 @@
 ﻿-- import data
 --copy global_detail from '/Documents and Settings/jenniferp/global_with_appendix.csv' delimiters ',' csv;
 delete from global_detail;
-copy global_detail from '/Documents and Settings/jenniferp/globalexport11Marunlocked.csv' delimiters ',' csv;
+copy global_detail from 'csvs_dec2014/export_global_dec_2014.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
@@ -11,92 +11,88 @@ copy global_detail from '/Documents and Settings/jenniferp/globalexport11Marunlo
 --NEW!
 --converts shells to carapaces
 update global_detail set term_code_1 = 'CAP' where term_code_1 = 'SHE'
-and cites_taxon_code between 2100 and 2500;
+and taxo_data @> '"class_name" => "Reptilia"'::hstore;
 
 
 --converts flanks to whole skins for crocodilians
-update global_detail set quantity_1 = quantity_1/2 where cites_taxon_code between
- 2200 and 2230.1 and term_code_1 = 'SKI' and unit_code_1 = 'SID';
+update global_detail set quantity_1 = quantity_1/2 where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+and term_code_1 = 'SKI' and unit_code_1 = 'SID';
 
-update global_detail set unit_code_1 = null where cites_taxon_code between
- 2200 and 2230.1 and term_code_1 = 'SKI' and unit_code_1 in ('BSK', 'HRN', 'SID');
+update global_detail set unit_code_1 = null where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+and term_code_1 = 'SKI' and unit_code_1 in ('BSK', 'HRN', 'SID');
 
 --removes reptile skins reported in other units
-delete from global_detail where cites_taxon_code between
- 2200 and 2230.1 and term_code_1 = 'SKI' and unit_code_1 is not null;
+delete from global_detail where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+and term_code_1 = 'SKI' and unit_code_1 is not null;
 
 --AMPHS: converts frogs legs to meat
 update global_detail set term_code_1 = 'MEA' where term_code_1 = 'LEG' 
-and cites_taxon_code between 2500 and 2599;
+and taxo_data @> '"class_name" => "Amphibia"'::hstore;
 
 --PLANTS
 --this updates roots to live for Galanthus
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and cites_taxon_code between 4010 and 4011.5;
---changing the synonym Galanthus ikariae to approved taxon Galanthus woronowii
-update global_detail set cites_taxon_code = 4011.5 where cites_taxon_code = 4010.7;
---changing the synonym Trichipteris williamsii to approved taxon Cyathea williamsii
-update global_detail set cites_taxon_code = 5035.25 where cites_taxon_code = 5050.8;
+and taxo_data @> '"class_name" => "Galanthus"'::hstore;
 
 --this updates roots to live for Cyclamen spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and cites_taxon_code between 7470 and 7472.6;
+and taxo_data @> '"class_name" => "Cyclamen"'::hstore;
 
 --this updates roots to live for Sternbergia spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and cites_taxon_code between 4012 and 4012.8;
+and taxo_data @> '"class_name" => "Sternbergia"'::hstore;
 
 --this combines derivatives, extract and powder together for Aloes
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'POW'
-and cites_taxon_code between 5290 and 5335.9;
+and taxo_data @> '"class_name" => "Aloe"'::hstore;
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'DER'
-and cites_taxon_code between 5290 and 5335.9;
+and taxo_data @> '"class_name" => "Aloe"'::hstore;
 
 --this combines dried plants and roots for Bletilla striata
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'ROO'
-and cites_taxon_code = 5589.7;
+and full_name = 'Bletilla striata';
 
 --this combines terms for Cyatheaceae
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and cites_taxon_code between 4990 and 5035.6;
+and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
 
 --this combines terms for Cibotium barometz 
 update global_detail set term_code_1 = 'ROO' where term_code_1 = 'DPL'
-and cites_taxon_code = 5081.2;
+and full_name = 'Cibotium barometz';
 
 --this combines terms for Dicksonia
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FPT'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and cites_taxon_code between 5085 and 5087.2;
+and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
 
 --General
 update global_detail set quantity_1 = quantity_1/2 where unit_code_1 = 'SID';
@@ -167,150 +163,149 @@ update global_detail set unit_code_1 = 'SQM' where unit_code_1 = 'SQD';
 --TIMBER the following combines like timber terms and converts kg of timber to m3 where
 --a conversion factor is available
 --this is for Carnegiea gigantea 4162.2
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code = 4162.2;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code = 4162.2;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'STE'and cites_taxon_code = 4162.2;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'and cites_taxon_code = 4162.2;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code = 4162.2;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code = 4162.2;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Carnegiea gigantea';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Carnegiea gigantea';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'STE' and full_name = 'Carnegiea gigantea';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY' and full_name = 'Carnegiea gigantea';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Carnegiea gigantea';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Carnegiea gigantea';
 
 --this is for Aquilaria malaccensis
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code between 7585 and 7585.25;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code between 7585 and 7585.25;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code between 7585 and 7585.25;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code between 7585 and 7585.25;
-update global_detail set term_code_1 = 'CHP' where term_code_1 = 'POW' 
-and cites_taxon_code between 7585 and 7585.25;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Aquilaria malaccensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Aquilaria malaccensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Aquilaria malaccensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Aquilaria malaccensis';
+update global_detail set term_code_1 = 'CHP' where term_code_1 = 'POW' and full_name = 'Aquilaria malaccensis';
 
 --Pericopsis elata
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5283, 5283.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5283, 5283.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5283, 5283.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5283, 5283.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Pericopsis elata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Pericopsis elata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Pericopsis elata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Pericopsis elata';
 update global_detail set quantity_1 = quantity_1/725 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (5283, 5283.1);
+and full_name = 'Pericopsis elata';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (5283, 5283.1);
+and full_name = 'Pericopsis elata';
 
 --Cedrela odorata
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5359, 5359.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5359, 5359.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5359, 5359.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5359, 5359.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Cedrela odorata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Cedrela odorata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Cedrela odorata';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Cedrela odorata';
 update global_detail set quantity_1 = quantity_1/440 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (5359, 5359.1);
+and full_name = 'Cedrela odorata';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (5359, 5359.1);
+and full_name = 'Cedrela odorata';
 
 --Guaiacum sanctum
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (7670, 7670.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (7670, 7670.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (7670, 7670.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (7670, 7670.2);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Guaiacum sanctum';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Guaiacum sanctum';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Guaiacum sanctum';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Guaiacum sanctum';
 update global_detail set quantity_1 = quantity_1/1230 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (7670, 7670.2);
+and full_name = 'Guaiacum sanctum';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code in (7670, 7670.2);
+and full_name = 'Guaiacum sanctum';
 
 --Guaiacum officinale
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (7670.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (7670.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (7670.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (7670.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Guaiacum officinale';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Guaiacum officinale';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Guaiacum officinale';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Guaiacum officinale';
 update global_detail set quantity_1 = quantity_1/1230 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 7670.1;
+and full_name = 'Guaiacum officinale';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 7670.1;
+and full_name = 'Guaiacum officinale';
 
 --Swietenia macrophylla
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5361.15);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5361.15);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5361.15);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5361.15);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Swietenia macrophylla';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Swietenia macrophylla';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Swietenia macrophylla';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Swietenia macrophylla';
 update global_detail set quantity_1 = quantity_1/730 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.15;
+and full_name = 'Swietenia macrophylla';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.15;
+and full_name = 'Swietenia macrophylla';
 
 --Swietenia humilis
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5361.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5361.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5361.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5361.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Swietenia humilis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Swietenia humilis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Swietenia humilis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Swietenia humilis';
 update global_detail set quantity_1 = quantity_1/610 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.1;
+and full_name = 'Swietenia humilis';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.1;
+and full_name = 'Swietenia humilis';
 
 --Swietenia mahagoni
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5361.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5361.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5361.2);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5361.2);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Swietenia mahagoni';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Swietenia mahagoni';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Swietenia mahagoni';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Swietenia mahagoni';
 update global_detail set quantity_1 = quantity_1/750 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.2;
+and full_name = 'Swietenia mahagoni';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5361.2;
+and full_name = 'Swietenia mahagoni';
 
---Araucaria araucana
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (4050.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (4050.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (4050.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (4050.1);
+--'Araucaria araucana'
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Araucaria araucana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Araucaria araucana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Araucaria araucana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Araucaria araucana';
 update global_detail set quantity_1 = quantity_1/570 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 4050.1;
+and full_name = 'Araucaria araucana';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 4050.1;
+and full_name = 'Araucaria araucana';
 
 --Fitzroya cupressoides
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (4980.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (4980.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (4980.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (4980.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Fitzroya cupressoides';
 update global_detail set quantity_1 = quantity_1/480 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 4980.1;
+and full_name = 'Fitzroya cupressoides';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 4980.1;
+and full_name = 'Fitzroya cupressoides';
 
 --Dalbergia nigra
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (5282.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (5282.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (5282.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (5282.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Fitzroya cupressoides';
 update global_detail set quantity_1 = quantity_1/970 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5282.1;
+and full_name = 'Fitzroya cupressoides';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 5282.1;
+and full_name = 'Fitzroya cupressoides';
 
 --Abies guatemalensis
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code in (7430.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code in (7430.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code in (7430.1);
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code in (7430.1);
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Abies guatemalensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Abies guatemalensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Abies guatemalensis';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Abies guatemalensis';
 update global_detail set quantity_1 = quantity_1/350 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 7430.1;
+and full_name = 'Abies guatemalensis';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code = 7430.1;
+and full_name = 'Abies guatemalensis';
 
 --Prunus africana
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code between 7495 and 7495.1;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code between 7495 and 7495.1;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code between 7495 and 7495.1;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code between 7495 and 7495.1;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Prunus africana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Prunus africana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Prunus africana';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Prunus africana';
 update global_detail set quantity_1 = quantity_1/740 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code between 7495 and 7495.1;
+and full_name = 'Prunus africana';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code between 7495 and 7495.1;
+and full_name = 'Prunus africana';
 
 --Gonystylus spp. 
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'and cites_taxon_code between 7586 and 7586.49;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'and cites_taxon_code between 7586 and 7586.49;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'and cites_taxon_code between 7586 and 7586.49;
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN'and cites_taxon_code between 7586 and 7586.49;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
 update global_detail set quantity_1 = quantity_1/660 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code between 7586 and 7586.49;
+and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and cites_taxon_code between 7586 and 7586.49;
+and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
 
 --NEW:  Converts logs, sawn wood, timber pieces and veneer to timber for rest of taxa
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG';
@@ -333,13 +328,13 @@ delete from global_detail where term_code_1 ='SKI'
 and cites_taxon_code between 750 and 752.2;
 
 --Combine ivory carvings, carvings, and ivory pieces into "ivory carvings" for elephants
-update global_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP'and cites_taxon_code between 750 and 752.2;
-update global_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR'and cites_taxon_code between 750 and 752.2;
+update global_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP'and full_name = 'Elephantidae';
+update global_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR'and full_name = 'Elephantidae';
 
 --Combines terms for cacti rainsticks
-update global_detail set term_code_1 = 'STE' where term_code_1 = 'CAR'and cites_taxon_code between 4100 and 4913.2;
-update global_detail set term_code_1 = 'STE' where term_code_1 = 'TIP'and cites_taxon_code between 4100 and 4913.2;
-update global_detail set term_code_1 = 'STE' where term_code_1 = 'DPL'and cites_taxon_code between 4100 and 4913.2;
+update global_detail set term_code_1 = 'STE' where term_code_1 = 'CAR'and full_name = 'Cactaceae';
+update global_detail set term_code_1 = 'STE' where term_code_1 = 'TIP'and full_name = 'Cactaceae';
+update global_detail set term_code_1 = 'STE' where term_code_1 = 'DPL'and full_name = 'Cactaceae';
 
 delete from global_detail where term_code_1 not in
 ('BAR', 'BOD','CAP', 'CAR', 'CHP', 'EXT', 'DPL','EGG', 'EGL', 'HAI', 'HOR','IVC', 'LIV', 'MEA', 'MUS', 'COR','ROO', 'SEE',
@@ -348,19 +343,26 @@ delete from global_detail where term_code_1 not in
 --deleting out terms inappropriate for the calculations for mammals, birds and reptiles
 delete from global_detail where term_code_1 in
 ( 'BAR', 'CAR', 'CHP', 'COR', 'DPL', 'EXT', 'EGL', 'MEA', 'ROO', 'SEE', 'SHE', 'STE', 'TIM', 'VEN', 'WAX', 'POW')
-and cites_taxon_code between 1 and 2499;
+and (taxo_data @> '"class_name" => "Mammalia"'::hstore OR
+taxo_data @> '"class_name" => "Aves"'::hstore OR
+taxo_data @> '"class_name" => "Reptilia"'::hstore);
 
 --MUSK FOR MUSK DEER and CIVITIS
-delete from global_detail where term_code_1 = 'MUS' and
-cites_taxon_code > 852.5;
+delete from global_detail where term_code_1 = 'MUS' AND NOT
+taxo_data @> '"genus_name" => "Moschus"'::hstore;
 
 --FROG MEAT, sturgeon meat & STROMBUS GIGAS MEAT
-delete from global_detail where term_code_1 = 'MEA' and
-cites_taxon_code not between 2500 and 3188.1;
+delete from global_detail where term_code_1 = 'MEA' and NOT
+(taxo_data @> '"class_name" => "Amphibia"'::hstore OR
+taxo_data @> '"order_name" => "Acipenseriformes"'::hstore OR
+full_name = 'Strombus gigas');
 
 --TUSKS FOR ELEPHANTS, HIPPOS, WALRUS & NARWHAL ONLY
-delete from global_detail where term_code_1 = 'TUS' and
-cites_taxon_code not in (832, 832.1, 501, 501.1, 710.1) and cites_taxon_code not between 750 and 752.2;
+delete from global_detail where term_code_1 = 'TUS' AND NOT
+(taxo_data @> '"genus_name" => "Elephantidae"'::hstore OR
+taxo_data @> '"genus_name" => "Hippopotamidae"'::hstore OR
+full_name = 'Odobenus rosmarus' or
+full_name = 'Monodon monoceros');
 
 --Deleted these as we want to include tusks (blank) and tusks (kg)
 --delete from global_detail where term_code_1 = 'TUS' and
@@ -386,8 +388,8 @@ cites_taxon_code not in (832, 832.1, 501, 501.1, 710.1) and cites_taxon_code not
 
 --Amend, larger range for turtles & tortoises
 --TURTLE CARAPACES
-delete from global_detail where term_code_1 = 'CAP' and
-cites_taxon_code not between 2130 and 2171;
+delete from global_detail where term_code_1 = 'CAP' and NOT
+taxo_data @> '"order_name" => "Testudines"'::hstore;
 
 --Amend, delete section on EUPHORBIA WAX
 --delete from global_detail where term_code_1 = 'WAX' and
@@ -400,40 +402,39 @@ cites_taxon_code not between 2130 and 2171;
 --------THE FOLLOWING NEEDS ADDITIONAL TERMS ADDED IF WE USE THIS TO LIMIT THE TERMS FOR THE DASHBOARD
 --deleting out terms not appropriate for the calculations for birds
 delete from global_detail where term_code_1 in ('SKI')
-and cites_taxon_code between 1000 and 2050;
+and NOT taxo_data @> '"class_name" => "Aves"'::hstore;
 
 --deleting out terms inappropriate for the calculations for amphibians
 delete from global_detail where term_code_1 in ('EGG','EGL')
-and cites_taxon_code between 2500 and 2561;
+and taxo_data @> '"class_name" => "Amphibia"'::hstore;
 
 --Amend, delete 'MEA' from here because we want it for sturgeon
 --deleting out terms inappropriate for the calculations for fish
 delete from global_detail where term_code_1 in ('DER','SKI')
-and cites_taxon_code between 2600 and 2730;
+and (taxo_data @> '"class_name" => "Actinopterygii"'::hstore OR
+taxo_data @> '"class_name" => "Sarcopterygii"'::hstore);
 
 --deleting out terms inappropriate for the calculations for inverts
 delete from global_detail where term_code_1 in ('DER','EGG')
-and cites_taxon_code between 2790 and 3999;
+and NOT taxo_data @> '"phylum_name" => "Sarcopterygii"'::hstore;
 
 --set appendix
 update global_detail set appendix = 'I' where appendix = '1';
 update global_detail set appendix = 'II' where appendix = '2';
 update global_detail set appendix = 'III' where appendix = '3';
 update global_detail set appendix = 'IV' where appendix = '4';
-
-
 --summarise data and import 
 delete from global_trade_summaries;
 
 insert into global_trade_summaries (shipment_year,reporter_type,appendix,term_code,unit_code,quantity,source_code,purpose_code,taxon_group )
-select shipment_year,reporter_type,appendix,term_code_1,unit_code_1,sum(quantity_1),source_code,purpose_code, cites_taxon_codes.taxon_group 
+select shipment_year,reporter_type,appendix,term_code_1,unit_code_1,sum(quantity_1),source_code,purpose_code, new_taxon_code.taxon_group 
 from global_detail 
-	inner join cites_taxon_codes on global_detail.cites_taxon_code = cites_taxon_codes.cites_taxon_code
-	inner join group_terms on 
-		cites_taxon_codes.taxon_group = group_terms.taxon_group and global_detail.term_code_1 =  group_terms.term_code 
-		and (global_detail.unit_code_1 = group_terms.unit_code or (global_detail.unit_code_1 is null and group_terms.unit_code is null))
-where shipment_year < 2009 and appendix in ('I','II','III')
-group by shipment_year,appendix,reporter_type,term_code_1,unit_code_1,source_code,purpose_code, cites_taxon_codes.taxon_group 
+  inner join new_taxon_code on global_detail.taxon_concept_id = new_taxon_code.taxon_concepts_id
+  inner join group_terms on 
+    new_taxon_code.taxon_group = group_terms.taxon_group and global_detail.term_code_1 =  group_terms.term_code 
+    and (global_detail.unit_code_1 = group_terms.unit_code or (global_detail.unit_code_1 is null and group_terms.unit_code is null))
+where appendix in ('I','II','III')
+group by shipment_year,appendix,reporter_type,term_code_1,unit_code_1,source_code,purpose_code, new_taxon_code.taxon_group
 
 --export
 select * from global_trade_summaries
