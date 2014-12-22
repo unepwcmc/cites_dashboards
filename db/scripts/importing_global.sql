@@ -325,7 +325,7 @@ delete from global_detail where term_code_1 ='TIM' and unit_code_1 != 'CUM';
 
 --deletes elephant skins
 delete from global_detail where term_code_1 ='SKI'
-and cites_taxon_code between 750 and 752.2;
+and taxo_data @> '"family_name" => "Elephantidae"';
 
 --Combine ivory carvings, carvings, and ivory pieces into "ivory carvings" for elephants
 update global_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and taxo_data @> '"family_name" => "Hippopotamidae"';
