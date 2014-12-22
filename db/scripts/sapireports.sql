@@ -13,15 +13,13 @@ SELECT
   sum(quantity), 
   sources.code AS source_code, 
   purposes.code AS purpose_code,
-  taxon_concepts.data AS taxo_data,
-  taxon_concepts.full_name AS full_name
+  tc.data AS taxo_data,
+  tc.full_name AS full_name
 FROM trade_shipments
-  LEFT JOIN taxon_concepts
-  ON taxon_concept_id = taxon_concepts.id
+  LEFT JOIN taxon_concepts tc
+  ON taxon_concept_id = tc.id
   LEFT JOIN (SELECT id, code  FROM trade_codes WHERE type = 'Term') terms
   ON terms.id = term_id
-  LEFT JOIN taxon_concepts tc
-  ON reported_taxon_concept_id = tc.id
   LEFT JOIN (SELECT id, code FROM trade_codes WHERE type = 'Unit') units
   ON units.id = unit_id
   LEFT JOIN (SELECT id, code FROM trade_codes WHERE type = 'Source') sources
@@ -41,9 +39,9 @@ GROUP BY reporter_type,
        source_code, 
        purpose_code,
        taxo_data,
-       taxon_concepts.full_name,
-       taxon_concepts.id AS taxon_concept_id
-order by reporter_type, shipment_year
+       tc.full_name,
+       tc.id AS taxon_concept_id
+order by reporter_type, shipment_year;
 
 
 
@@ -58,21 +56,21 @@ SELECT
   END AS reporter_type, 
   year AS shipment_year, 
   appendix,
-
   importers.iso_code2 as importer_country_code, 
   exporters.iso_code2 as exporter_country_code, 
   countries_of_origin.iso_code2 as origin_country_code,
-  taxon_concepts.t_class AS cites_class,
+  tc.t_class AS cites_class,
   terms.code AS term_code_1,
   units.code AS unit_code_1, 
   sum(quantity), 
   sources.code AS source_code, 
   purposes.code AS purpose_code
-  taxon_concepts.data AS taxo_data,
-  taxon_concepts.full_name AS full_name
+  tc.data AS taxo_data,
+  tc.full_name AS full_name,
+  tc.id AS taxon_concept_id
 FROM trade_shipments
-LEFT JOIN taxon_concepts
-  ON taxon_concept_id = taxon_concepts.id
+INNER JOIN taxon_concepts tc
+  ON taxon_concept_id = tc.id
 LEFT JOIN (SELECT id, iso_code2 FROM geo_entities) importers
 ON importer_id = importers.id
 LEFT JOIN (SELECT id, iso_code2 FROM geo_entities) exporters
@@ -81,8 +79,6 @@ LEFT JOIN (SELECT id, iso_code2 FROM geo_entities) countries_of_origin
 ON country_of_origin_id = countries_of_origin.id
 LEFT JOIN (SELECT id, code FROM trade_codes WHERE type = 'Term') terms
 ON terms.id = term_id
-LEFT JOIN taxon_concepts tc
-ON reported_taxon_concept_id = tc.id
 LEFT JOIN (SELECT id, code FROM trade_codes WHERE type = 'Unit') units
 ON units.id = unit_id
 LEFT JOIN (SELECT id, code FROM trade_codes WHERE type = 'Source') sources
@@ -106,8 +102,9 @@ group by reporter_type,
        source_code, 
        purpose_code
        taxo_data,
-       taxon_concepts.full_name
+       tc.full_name,
+       tc.id AS taxon_concept_id
 order by reporter_type, year
 
 
-) TO '/tmp/export_national_07_13_dec_2014.csv' WITH CSV
+) TO '/tmp/export_national_07_13_dec_2014.csv' WITH CSV;
