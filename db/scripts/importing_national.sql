@@ -1,8 +1,7 @@
-﻿delete from national_detail;
-
--- import data
-copy national_detail from '/home/miguelt/national_exportNov2013.csv' delimiters ',' csv;
-
+﻿-- import data
+--copy national_detail from '/Documents and Settings/jenniferp/global_with_appendix.csv' delimiters ',' csv;
+delete from national_detail;
+copy national_detail from 'csvs_dec2014/export_global_dec_2014.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
@@ -16,14 +15,14 @@ and taxo_data @> '"class_name" => "Reptilia"'::hstore;
 
 
 --converts flanks to whole skins for crocodilians
-update national_detail set quantity_1 = quantity_1/2 where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+update national_detail set quantity_1 = quantity_1/2 where taxo_data @> '"class_name" => "Crocodylia"'::hstore
 and term_code_1 = 'SKI' and unit_code_1 = 'SID';
 
-update national_detail set unit_code_1 = null where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+update national_detail set unit_code_1 = null where taxo_data @> '"order_name" => "Crocodylia"'::hstore
 and term_code_1 = 'SKI' and unit_code_1 in ('BSK', 'HRN', 'SID');
 
 --removes reptile skins reported in other units
-delete from national_detail where taxo_data @> '"class_name" => "Crocodylia"'::hstore 
+delete from national_detail where taxo_data @> '"order_name" => "Crocodylia"'::hstore
 and term_code_1 = 'SKI' and unit_code_1 is not null;
 
 --AMPHS: converts frogs legs to meat
@@ -33,21 +32,21 @@ and taxo_data @> '"class_name" => "Amphibia"'::hstore;
 --PLANTS
 --this updates roots to live for Galanthus
 update national_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and taxo_data @> '"class_name" => "Galanthus"'::hstore;
+and split_part(full_name, ' ', 1) = "Galanthus";
 
 --this updates roots to live for Cyclamen spp.
 update national_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and taxo_data @> '"class_name" => "Cyclamen"'::hstore;
+and split_part(full_name, ' ', 1) = "Cyclamen";
 
 --this updates roots to live for Sternbergia spp.
 update national_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and taxo_data @> '"class_name" => "Sternbergia"'::hstore;
+and split_part(full_name, ' ', 1) = "Sternbergia";
 
 --this combines derivatives, extract and powder together for Aloes
 update national_detail set term_code_1 = 'EXT' where term_code_1 = 'POW'
-and taxo_data @> '"class_name" => "Aloe"'::hstore;
+and split_part(full_name, ' ', 1) = "Aloe";
 update national_detail set term_code_1 = 'EXT' where term_code_1 = 'DER'
-and taxo_data @> '"class_name" => "Aloe"'::hstore;
+and split_part(full_name, ' ', 1) = "Aloe";
 
 --this combines dried plants and roots for Bletilla striata
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'ROO'
@@ -55,21 +54,21 @@ and full_name = 'Bletilla striata';
 
 --this combines terms for Cyatheaceae
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and taxo_data @> '"class_name" => "Cyatheaceae"'::hstore;
+and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
 
 --this combines terms for Cibotium barometz 
 update national_detail set term_code_1 = 'ROO' where term_code_1 = 'DPL'
@@ -77,23 +76,23 @@ and full_name = 'Cibotium barometz';
 
 --this combines terms for Dicksonia
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'FPT'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and taxo_data @> '"class_name" => "Dicksonia"'::hstore;
+and split_part(full_name, ' ', 1) = "Dicksonia";
 
 --General
 update national_detail set quantity_1 = quantity_1/2 where unit_code_1 = 'SID';
@@ -299,14 +298,14 @@ update national_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and ter
 and full_name = 'Prunus africana';
 
 --Gonystylus spp. 
-update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
-update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
-update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
-update national_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and split_part(full_name, ' ', 1) = "Gonystylus";
+update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and split_part(full_name, ' ', 1) = "Gonystylus";
+update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and split_part(full_name, ' ', 1) = "Gonystylus";
+update national_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and split_part(full_name, ' ', 1) = "Gonystylus";
 update national_detail set quantity_1 = quantity_1/660 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+and split_part(full_name, ' ', 1) = "Gonystylus";
 update national_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and taxo_data @> '"genus_name" => "Gonystylus"'::hstore;
+and split_part(full_name, ' ', 1) = "Gonystylus";
 
 --NEW:  Converts logs, sawn wood, timber pieces and veneer to timber for rest of taxa
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG';
@@ -329,13 +328,13 @@ delete from national_detail where term_code_1 ='SKI'
 and cites_taxon_code between 750 and 752.2;
 
 --Combine ivory carvings, carvings, and ivory pieces into "ivory carvings" for elephants
-update national_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP'and full_name = 'Elephantidae';
-update national_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR'and full_name = 'Elephantidae';
+update national_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and taxo_data @> '"family_name" => "Hippopotamidae"';
+update national_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Hippopotamidae"';
 
 --Combines terms for cacti rainsticks
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'CAR'and full_name = 'Cactaceae';
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'TIP'and full_name = 'Cactaceae';
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'DPL'and full_name = 'Cactaceae';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Cactaceae"';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'TIP' and taxo_data @> '"family_name" => "Cactaceae"';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'DPL' and taxo_data @> '"family_name" => "Cactaceae"';
 
 delete from national_detail where term_code_1 not in
 ('BAR', 'BOD','CAP', 'CAR', 'CHP', 'EXT', 'DPL','EGG', 'EGL', 'HAI', 'HOR','IVC', 'LIV', 'MEA', 'MUS', 'COR','ROO', 'SEE',
@@ -350,7 +349,7 @@ taxo_data @> '"class_name" => "Reptilia"'::hstore);
 
 --MUSK FOR MUSK DEER and CIVITIS
 delete from national_detail where term_code_1 = 'MUS' AND NOT
-taxo_data @> '"genus_name" => "Moschus"'::hstore;
+split_part(full_name, ' ', 1) = "Moschus";
 
 --FROG MEAT, sturgeon meat & STROMBUS GIGAS MEAT
 delete from national_detail where term_code_1 = 'MEA' and NOT
@@ -360,8 +359,8 @@ full_name = 'Strombus gigas');
 
 --TUSKS FOR ELEPHANTS, HIPPOS, WALRUS & NARWHAL ONLY
 delete from national_detail where term_code_1 = 'TUS' AND NOT
-(taxo_data @> '"genus_name" => "Elephantidae"'::hstore OR
-taxo_data @> '"genus_name" => "Hippopotamidae"'::hstore OR
+(taxo_data @> '"family_name" => "Elephantidae"'::hstore OR
+taxo_data @> '"family_name" => "Hippopotamidae"'::hstore OR
 full_name = 'Odobenus rosmarus' or
 full_name = 'Monodon monoceros');
 
@@ -417,14 +416,13 @@ taxo_data @> '"class_name" => "Sarcopterygii"'::hstore);
 
 --deleting out terms inappropriate for the calculations for inverts
 delete from national_detail where term_code_1 in ('DER','EGG')
-and NOT taxo_data @> '"phylum_name" => "Sarcopterygii"'::hstore;
+and NOT taxo_data @> '"phylum_name" => "Chordata"'::hstore;
 
 --set appendix
 update national_detail set appendix = 'I' where appendix = '1';
 update national_detail set appendix = 'II' where appendix = '2';
 update national_detail set appendix = 'III' where appendix = '3';
 update national_detail set appendix = 'IV' where appendix = '4';
---summarise data and import
 
 --summarise data and import 
 delete from national_trade_summaries; 
