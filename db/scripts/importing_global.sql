@@ -1,7 +1,7 @@
 -- import data
 --copy global_detail from '/Documents and Settings/jenniferp/global_with_appendix.csv' delimiters ',' csv;
 delete from global_detail;
-copy global_detail from 'csvs_dec2014/export_global_dec_2014.csv' delimiters ',' csv;
+copy global_detail from '/tmp/export_global_dec_2014.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
@@ -32,21 +32,21 @@ and taxo_data @> '"class_name" => "Amphibia"'::hstore;
 --PLANTS
 --this updates roots to live for Galanthus
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and split_part(full_name, ' ', 1) = "Galanthus";
+and split_part(full_name, ' ', 1) = 'Galanthus';
 
 --this updates roots to live for Cyclamen spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and split_part(full_name, ' ', 1) = "Cyclamen";
+and split_part(full_name, ' ', 1) = 'Cyclamen';
 
 --this updates roots to live for Sternbergia spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and split_part(full_name, ' ', 1) = "Sternbergia";
+and split_part(full_name, ' ', 1) = 'Sternbergia';
 
 --this combines derivatives, extract and powder together for Aloes
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'POW'
-and split_part(full_name, ' ', 1) = "Aloe";
+and split_part(full_name, ' ', 1) = 'Aloe';
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'DER'
-and split_part(full_name, ' ', 1) = "Aloe";
+and split_part(full_name, ' ', 1) = 'Aloe';
 
 --this combines dried plants and roots for Bletilla striata
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'ROO'
@@ -76,23 +76,23 @@ and full_name = 'Cibotium barometz';
 
 --this combines terms for Dicksonia
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FPT'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and split_part(full_name, ' ', 1) = "Dicksonia";
+and split_part(full_name, ' ', 1) = 'Dicksonia';
 
 --General
 update global_detail set quantity_1 = quantity_1/2 where unit_code_1 = 'SID';
@@ -298,14 +298,14 @@ update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_
 and full_name = 'Prunus africana';
 
 --Gonystylus spp. 
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and split_part(full_name, ' ', 1) = "Gonystylus";
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and split_part(full_name, ' ', 1) = "Gonystylus";
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and split_part(full_name, ' ', 1) = "Gonystylus";
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and split_part(full_name, ' ', 1) = "Gonystylus";
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and split_part(full_name, ' ', 1) = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and split_part(full_name, ' ', 1) = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and split_part(full_name, ' ', 1) = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and split_part(full_name, ' ', 1) = 'Gonystylus';
 update global_detail set quantity_1 = quantity_1/660 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and split_part(full_name, ' ', 1) = "Gonystylus";
+and split_part(full_name, ' ', 1) = 'Gonystylus';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and split_part(full_name, ' ', 1) = "Gonystylus";
+and split_part(full_name, ' ', 1) = 'Gonystylus';
 
 --NEW:  Converts logs, sawn wood, timber pieces and veneer to timber for rest of taxa
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG';
@@ -349,7 +349,7 @@ taxo_data @> '"class_name" => "Reptilia"'::hstore);
 
 --MUSK FOR MUSK DEER and CIVITIS
 delete from global_detail where term_code_1 = 'MUS' AND NOT
-split_part(full_name, ' ', 1) = "Moschus";
+split_part(full_name, ' ', 1) = 'Moschus';
 
 --FROG MEAT, sturgeon meat & STROMBUS GIGAS MEAT
 delete from global_detail where term_code_1 = 'MEA' and NOT
@@ -434,7 +434,7 @@ from global_detail
     new_taxon_code.taxon_group = group_terms.taxon_group and global_detail.term_code_1 =  group_terms.term_code 
     and (global_detail.unit_code_1 = group_terms.unit_code or (global_detail.unit_code_1 is null and group_terms.unit_code is null))
 where appendix in ('I','II','III')
-group by shipment_year,appendix,reporter_type,term_code_1,unit_code_1,source_code,purpose_code, new_taxon_code.taxon_group
+group by shipment_year,appendix,reporter_type,term_code_1,unit_code_1,source_code,purpose_code, new_taxon_code.taxon_group;
 
 --export
 select * from global_trade_summaries
