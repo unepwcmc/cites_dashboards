@@ -15,7 +15,7 @@ and taxo_data @> '"class_name" => "Reptilia"'::hstore;
 
 
 --converts flanks to whole skins for crocodilians
-update global_detail set quantity_1 = quantity_1/2 where taxo_data @> '"class_name" => "Crocodylia"'::hstore
+update global_detail set quantity_1 = quantity_1/2 where taxo_data @> '"order_name" => "Crocodylia"'::hstore
 and term_code_1 = 'SKI' and unit_code_1 = 'SID';
 
 update global_detail set unit_code_1 = null where taxo_data @> '"order_name" => "Crocodylia"'::hstore
@@ -268,14 +268,14 @@ update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_
 and full_name = 'Fitzroya cupressoides';
 
 --Dalbergia nigra
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Fitzroya cupressoides';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Fitzroya cupressoides';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Fitzroya cupressoides';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Fitzroya cupressoides';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Dalbergia nigra';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and full_name = 'Dalbergia nigra';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and full_name = 'Dalbergia nigra';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and full_name = 'Dalbergia nigra';
 update global_detail set quantity_1 = quantity_1/970 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and full_name = 'Fitzroya cupressoides';
+and full_name = 'Dalbergia nigra';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and full_name = 'Fitzroya cupressoides';
+and full_name = 'Dalbergia nigra';
 
 --Abies guatemalensis
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and full_name = 'Abies guatemalensis';
@@ -328,8 +328,8 @@ delete from global_detail where term_code_1 ='SKI'
 and taxo_data @> '"family_name" => "Elephantidae"';
 
 --Combine ivory carvings, carvings, and ivory pieces into "ivory carvings" for elephants
-update global_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and taxo_data @> '"family_name" => "Hippopotamidae"';
-update global_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Hippopotamidae"';
+update global_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and taxo_data @> '"family_name" => "Elephantidae"';
+update global_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Elephantidae"';
 
 --Combines terms for cacti rainsticks
 update global_detail set term_code_1 = 'STE' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Cactaceae"';
