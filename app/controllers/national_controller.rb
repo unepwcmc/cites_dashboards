@@ -6,7 +6,7 @@ class NationalController < SharedController
     else
       @controlpanel = NationalControlPanel.new({:group => "Mammals",
                                               :country=> params[:id] != nil ? params[:id] : "BR" ,
-                                              :date_range=>"2011",
+                                              :date_range=>"2012",
                                               :term=>GroupTerm.default("Mammals"),
                                               :source=>'All',
                                               :display=>"Time",

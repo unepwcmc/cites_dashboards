@@ -1,7 +1,10 @@
 ﻿-- import data
 --copy national_detail from '/Documents and Settings/jenniferp/global_with_appendix.csv' delimiters ',' csv;
 delete from national_detail;
-copy national_detail from '/tmp/export_global_dec_2014.csv' delimiters ',' csv;
+copy national_detail from '/tmp/export_national_1990_dec_2014.csv' delimiters ',' csv;
+copy national_detail from '/tmp/export_national_1990_2000_dec_2014.csv' delimiters ',' csv;
+copy national_detail from '/tmp/export_national_2000_2010_dec_2014.csv' delimiters ',' csv;
+copy national_detail from '/tmp/export_national_2010_dec_2014.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)

@@ -94,4 +94,4 @@ task :setup_production_database_configuration do
   run "mkdir -p #{shared_path}/config"
   put(spec.to_yaml, "#{shared_path}/config/database.yml")
 end
-after "deploy:setup", :setup_production_database_configuration
+after "deploy:setup", :setup_production_database_configuration && "deploy:migrate"

@@ -17,5 +17,5 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 # Gems
-config.gem "capistrano"
-config.gem "capistrano-ext"
+config.gem "capistrano", '~> 2.15.5'
+#config.gem "capistrano-ext"
