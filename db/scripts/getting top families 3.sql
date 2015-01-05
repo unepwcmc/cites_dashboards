@@ -10,8 +10,10 @@ INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,uni
   source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -26,24 +28,28 @@ FROM
     'Global' as import_country_code, 'Global' as export_country_code,
     'All' as source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1,
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
-
 
 -- country all, source Distinct
 INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,unit_code,
-  source_code,import_country_code, export_country_code,taxon_family, quantity, position )
+  source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -58,14 +64,17 @@ FROM
     'Global' as import_country_code, 'Global' as export_country_code,
     source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1,
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
 
 
@@ -74,8 +83,10 @@ INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,uni
   source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -90,14 +101,17 @@ FROM
     import_country_code, 'N/A' as export_country_code,
     'All' as source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1, 
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
 
 -- Export Country, source All
@@ -105,8 +119,10 @@ INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,uni
   source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -121,14 +137,17 @@ FROM
     'N/A' as import_country_code,export_country_code,
     'All' as source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1,
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
 
 -- Import Country, source
@@ -136,8 +155,10 @@ INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,uni
   source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -152,23 +173,28 @@ FROM
     import_country_code, 'N/A' as export_country_code,
     source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1,
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
 
 -- export Country, source
 INSERT INTO top_families(shipment_year, taxon_group, reporter_type,term_code,unit_code,
-  source_code,import_country_code, export_country_code,taxon_family, quantity, position )
+  source_code,import_country_code, export_country_code,taxon_family, quantity, position)
 SELECT *
 FROM
-  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, species_family, quantity_1,
-          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos
+  (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,
+          source_code,import_country_code,export_country_code, species_family, quantity_1,
+          rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
+          unit_code_1 ORDER BY quantity_1 DESC, species_family) AS pos
      FROM (SELECT reporter_type, CASE
             WHEN shipment_year BETWEEN 2008 AND 2012 THEN 2012
             WHEN shipment_year BETWEEN 2003 AND 2007 THEN 2007
@@ -183,14 +209,17 @@ FROM
     'N/A' as import_country_code, export_country_code,
     source_code,
     --unit_code_1, purpose_code,
-    code.taxon_concepts_id, code.taxon_group, code.species_family, term_code_1,unit_code_1,
+    code.taxon_group, code.species_family, term_code_1,unit_code_1,
     SUM(quantity_1) as quantity_1
     FROM national_detail
       inner join new_taxon_code code on national_detail.taxon_concept_id = code.taxon_concepts_id
-      inner join group_terms on code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
-        and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
+      inner join group_terms on code.taxon_group = group_terms.taxon_group
+      and national_detail.term_code_1 =  group_terms.term_code
+      and (national_detail.unit_code_1 = group_terms.unit_code or
+        (national_detail.unit_code_1 is null and group_terms.unit_code is null))
     WHERE appendix in ('I','II') AND origin_country_code is null
-    GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig) AS ss
+    GROUP BY 1,2,3,4,5,6,7,8,9) as orig
+    ) AS ss
 WHERE pos < 11;
 
 
