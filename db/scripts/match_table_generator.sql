@@ -6,11 +6,12 @@ DELETE FROM taxon_concepts;
 COPY taxon_concepts FROM '/tmp/taxon_concepts.csv'  DELIMITER ',' CSV;
 
 CREATE INDEX full_name_idx ON taxon_concepts(full_name);
-CREATE INDEX GENUS_name_idx ON cites_taxon_codes(taxon_genus);
+CREATE INDEX genus_name_idx ON cites_taxon_codes(taxon_genus);
 DROP TABLE new_taxon_code;
 
 
 CREATE TABLE new_taxon_code AS
+SELECT DISTINCT * FROM (
 SELECT taxon_concepts_id, 
        data -> 'kingdom_name' AS species_kingdom,
        data -> 'phylum_name' AS species_phylum,
@@ -21,9 +22,24 @@ SELECT taxon_concepts_id,
        full_name,
        name_status,
        taxon_group
-FROM cites_taxon_codes ctc
-LEFT JOIN taxon_concepts tc
-ON split_part(tc.full_name, ' ', 1) = taxon_genus
+       FROM cites_taxon_codes ctc
+       JOIN taxon_concepts tc
+       ON tc.name_status in ('A', 'N') AND LOWER(tc.data->'genus_name') = LOWER(taxon_genus)
+       UNION
+       SELECT taxon_concepts_id, 
+              data -> 'kingdom_name' AS species_kingdom,
+              data -> 'phylum_name' AS species_phylum,
+              data -> 'class_name' AS species_class,
+              data -> 'order_name' AS species_order,
+              data -> 'family_name' AS species_family,
+              data -> 'genus_name' AS species_genus,
+              full_name,
+              name_status,
+              taxon_group
+       FROM cites_taxon_codes ctc
+       JOIN taxon_concepts tc
+       ON tc.name_status = 'H' AND LOWER(split_part(tc.full_name, ' ', 1) )= LOWER(taxon_genus)
+) a
 
 
 COPY(

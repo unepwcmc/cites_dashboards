@@ -354,19 +354,19 @@ end
       if country != nil
           #data = TopSpecies.sum(:quantity, :limit => 10, :group => "cites_name,cites_taxon_code", :order => "sum(quantity) desc", :conditions => ['taxon_group = ? and reporter_type = ? and group_term_id = ? and shipment_year between ? and ? and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + ' = ? and source_code = ? ' ,
           #                                                          group,reporter_type,term,start_year,end_year,country,source])
-          data = TopSpecies.find_by_sql ["SELECT cites_name,cites_taxon_code, sum(quantity) as quantity FROM top_species WHERE taxon_group = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and " + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? GROUP BY cites_name,cites_taxon_code ORDER BY sum(quantity) DESC",
+          data = TopSpecies.find_by_sql ["SELECT cites_name,taxon_concepts_id, sum(quantity) as quantity FROM top_species WHERE taxon_group = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and " + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? GROUP BY cites_name,taxon_concepts_id ORDER BY sum(quantity) DESC",
                                                                     group,reporter_type,source,term,start_year,end_year,country]
       else
           #data = TopSpecies.sum(:quantity, :limit => 10, :group => "cites_name,cites_taxon_code", :order => "sum(quantity) desc", :conditions => ['taxon_group = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + ' = ?',
           #                                                           group,reporter_type,source,term,start_year,end_year,'Global'])
-          data = TopSpecies.find_by_sql ["SELECT cites_name,cites_taxon_code, sum(quantity) as quantity FROM top_species WHERE taxon_group = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and " + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? GROUP BY cites_name,cites_taxon_code ORDER BY sum(quantity) DESC",
+          data = TopSpecies.find_by_sql ["SELECT cites_name,taxon_concepts_id, sum(quantity) as quantity FROM top_species WHERE taxon_group = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and " + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? GROUP BY cites_name,taxon_concepts_id ORDER BY sum(quantity) DESC",
                                                                     group,reporter_type,source,term,start_year,end_year,'Global']
       end
 
       #chart needs two arrays, data and labels
       data.each {|d|
         dataarray <<  d["quantity"]
-        speciesarray << d["cites_taxon_code"]
+        speciesarray << d["taxon_concepts_id"]
         xaxislabels << d["cites_name"]
       }
 
@@ -392,18 +392,18 @@ end
     #data comes back as a hash
     if source != nil
       if country != nil
-          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ['cites_taxon_code = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ?and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ?  and appendix <> 'III' and origin_country_code is null",
+          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ['taxon_concepts_id = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ?and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ?  and appendix <> 'III' and origin_country_code is null",
                                                                    species,reporter_type,source,term,start_year,end_year,country])
       else
-          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ["cites_taxon_code = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and appendix <> 'III' and origin_country_code is null",
+          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ["taxon_concepts_id = ? and reporter_type = ? and source_code = ?  and group_term_id = ? and shipment_year between ? and ? and appendix <> 'III' and origin_country_code is null",
                                                                    species,reporter_type,source,term,start_year,end_year])
       end
     else
       if country != nil
-          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ['cites_taxon_code = ? and reporter_type = ? and group_term_id = ? and shipment_year between ? and ?and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? and appendix <> 'III' and origin_country_code is null",
+          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ['taxon_concepts_id = ? and reporter_type = ? and group_term_id = ? and shipment_year between ? and ?and ' + (reporter_type == "I" ? "import_country_code" : "export_country_code") + " = ? and appendix <> 'III' and origin_country_code is null",
                                                                    species,reporter_type,term,start_year,end_year,country])
       else
-          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ["cites_taxon_code = ? and reporter_type = ? and group_term_id = ? and shipment_year between ? and ? and appendix <> 'III' and origin_country_code is null",
+          data = SpeciesTradeSummary.sum(:quantity, :group=>:shipment_year, :conditions => ["taxon_concepts_id = ? and reporter_type = ? and group_term_id = ? and shipment_year between ? and ? and appendix <> 'III' and origin_country_code is null",
                                                                    species,reporter_type,term,start_year,end_year])
       end
     end

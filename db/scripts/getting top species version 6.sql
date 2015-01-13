@@ -197,7 +197,7 @@ WHERE pos < 11;
 delete from species_trade_summaries;
 insert into species_trade_summaries (shipment_year,appendix,origin_country_code,reporter_type,
   import_country_code,export_country_code,term_code,unit_code,quantity,source_code,purpose_code,
-  taxon_group,cites_taxon_code,cites_name )
+  taxon_group,taxon_concepts_id,cites_name )
 select n.shipment_year,appendix,origin_country_code,n.reporter_type,n.import_country_code,n.export_country_code,
 term_code_1,unit_code_1,sum(quantity_1),n.source_code,n.purpose_code, code.taxon_group, code.taxon_concepts_id,code.full_name
 from national_detail n
