@@ -1,10 +1,94 @@
 ﻿-- import data
---copy national_detail from '/Documents and Settings/jenniferp/global_with_appendix.csv' delimiters ',' csv;
-delete from national_detail;
-copy national_detail from '/tmp/export_national_1990_dec_2014.csv' delimiters ',' csv;
-copy national_detail from '/tmp/export_national_1990_2000_dec_2014.csv' delimiters ',' csv;
-copy national_detail from '/tmp/export_national_2000_2010_dec_2014.csv' delimiters ',' csv;
-copy national_detail from '/tmp/export_national_2010_dec_2014.csv' delimiters ',' csv;
+DROP INDEX IF EXISTS index_national_detail_on_taxon_concept_id;
+TRUNCATE national_detail;
+copy national_detail (
+  reporter_type,
+  shipment_year,
+  appendix,
+  import_country_code,
+  export_country_code,
+  origin_country_code,
+  term_code_1,
+  unit_code_1,
+  quantity_1,
+  source_code,
+  purpose_code,
+  full_name_with_spp,
+  full_name,
+  genus_name,
+  family_name,
+  order_name,
+  class_name,
+  phylum_name,
+  kingdom_name,
+  taxon_concept_id
+) from '/tmp/export_national_1990_jan_2015.csv' delimiters ',' csv;
+copy national_detail (
+  reporter_type,
+  shipment_year,
+  appendix,
+  import_country_code,
+  export_country_code,
+  origin_country_code,
+  term_code_1,
+  unit_code_1,
+  quantity_1,
+  source_code,
+  purpose_code,
+  full_name_with_spp,
+  full_name,
+  genus_name,
+  family_name,
+  order_name,
+  class_name,
+  phylum_name,
+  kingdom_name,
+  taxon_concept_id
+) from '/tmp/export_national_1990_2000_jan_2015.csv' delimiters ',' csv;
+copy national_detail (
+  reporter_type,
+  shipment_year,
+  appendix,
+  import_country_code,
+  export_country_code,
+  origin_country_code,
+  term_code_1,
+  unit_code_1,
+  quantity_1,
+  source_code,
+  purpose_code,
+  full_name_with_spp,
+  full_name,
+  genus_name,
+  family_name,
+  order_name,
+  class_name,
+  phylum_name,
+  kingdom_name,
+  taxon_concept_id
+) from '/tmp/export_national_2000_2010_jan_2015.csv' delimiters ',' csv;
+copy national_detail (
+  reporter_type,
+  shipment_year,
+  appendix,
+  import_country_code,
+  export_country_code,
+  origin_country_code,
+  term_code_1,
+  unit_code_1,
+  quantity_1,
+  source_code,
+  purpose_code,
+  full_name_with_spp,
+  full_name,
+  genus_name,
+  family_name,
+  order_name,
+  class_name,
+  phylum_name,
+  kingdom_name,
+  taxon_concept_id
+) from '/tmp/export_national_2010_jan_2015.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
@@ -14,23 +98,23 @@ copy national_detail from '/tmp/export_national_2010_dec_2014.csv' delimiters ',
 --NEW!
 --converts shells to carapaces
 update national_detail set term_code_1 = 'CAP' where term_code_1 = 'SHE'
-and taxo_data @> '"class_name" => "Reptilia"'::hstore;
+and class_name = 'Reptilia';
 
 
 --converts flanks to whole skins for crocodilians
-update national_detail set quantity_1 = quantity_1/2 where taxo_data @> '"order_name" => "Crocodylia"'::hstore
+update national_detail set quantity_1 = quantity_1/2 where order_name = 'Crocodylia'
 and term_code_1 = 'SKI' and unit_code_1 = 'SID';
 
-update national_detail set unit_code_1 = null where taxo_data @> '"order_name" => "Crocodylia"'::hstore
+update national_detail set unit_code_1 = null where order_name = 'Crocodylia'
 and term_code_1 = 'SKI' and unit_code_1 in ('BSK', 'HRN', 'SID');
 
 --removes reptile skins reported in other units
-delete from national_detail where taxo_data @> '"order_name" => "Crocodylia"'::hstore
+delete from national_detail where order_name = 'Crocodylia'
 and term_code_1 = 'SKI' and unit_code_1 is not null;
 
 --AMPHS: converts frogs legs to meat
 update national_detail set term_code_1 = 'MEA' where term_code_1 = 'LEG' 
-and taxo_data @> '"class_name" => "Amphibia"'::hstore;
+and class_name = 'Amphibia';
 
 --PLANTS
 --this updates roots to live for Galanthus
@@ -57,21 +141,21 @@ and full_name = 'Bletilla striata';
 
 --this combines terms for Cyatheaceae
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and taxo_data @> '"family_name" => "Cyatheaceae"'::hstore;
+and family_name = 'Cyatheaceae';
 
 --this combines terms for Cibotium barometz 
 update national_detail set term_code_1 = 'ROO' where term_code_1 = 'DPL'
@@ -328,16 +412,16 @@ delete from national_detail where term_code_1 ='TIM' and unit_code_1 != 'CUM';
 
 --deletes elephant skins
 delete from national_detail where term_code_1 ='SKI'
-and taxo_data @> '"family_name" => "Elephantidae"';
+and family_name = 'Elephantidae';
 
 --Combine ivory carvings, carvings, and ivory pieces into "ivory carvings" for elephants
-update national_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and taxo_data @> '"family_name" => "Elephantidae"';
-update national_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Elephantidae"';
+update national_detail set term_code_1 = 'IVC' where term_code_1 = 'IVP' and family_name = 'Elephantidae';
+update national_detail set term_code_1 = 'IVC' where term_code_1 = 'CAR' and family_name = 'Elephantidae';
 
 --Combines terms for cacti rainsticks
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'CAR' and taxo_data @> '"family_name" => "Cactaceae"';
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'TIP' and taxo_data @> '"family_name" => "Cactaceae"';
-update national_detail set term_code_1 = 'STE' where term_code_1 = 'DPL' and taxo_data @> '"family_name" => "Cactaceae"';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'CAR' and family_name = 'Cactaceae';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'TIP' and family_name = 'Cactaceae';
+update national_detail set term_code_1 = 'STE' where term_code_1 = 'DPL' and family_name = 'Cactaceae';
 
 delete from national_detail where term_code_1 not in
 ('BAR', 'BOD','CAP', 'CAR', 'CHP', 'EXT', 'DPL','EGG', 'EGL', 'HAI', 'HOR','IVC', 'LIV', 'MEA', 'MUS', 'COR','ROO', 'SEE',
@@ -346,9 +430,9 @@ delete from national_detail where term_code_1 not in
 --deleting out terms inappropriate for the calculations for mammals, birds and reptiles
 delete from national_detail where term_code_1 in
 ( 'BAR', 'CAR', 'CHP', 'COR', 'DPL', 'EXT', 'EGL', 'MEA', 'ROO', 'SEE', 'SHE', 'STE', 'TIM', 'VEN', 'WAX', 'POW')
-and (taxo_data @> '"class_name" => "Mammalia"'::hstore OR
-taxo_data @> '"class_name" => "Aves"'::hstore OR
-taxo_data @> '"class_name" => "Reptilia"'::hstore);
+and (class_name = 'Mammalia' OR
+class_name = 'Aves' OR
+class_name = 'Reptilia');
 
 --MUSK FOR MUSK DEER and CIVITIS
 delete from national_detail where term_code_1 = 'MUS' AND NOT
@@ -356,14 +440,14 @@ split_part(full_name, ' ', 1) = 'Moschus';
 
 --FROG MEAT, sturgeon meat & STROMBUS GIGAS MEAT
 delete from national_detail where term_code_1 = 'MEA' and NOT
-(taxo_data @> '"class_name" => "Amphibia"'::hstore OR
-taxo_data @> '"order_name" => "Acipenseriformes"'::hstore OR
+(class_name = 'Amphibia' OR
+order_name = 'Acipenseriformes' OR
 full_name = 'Strombus gigas');
 
 --TUSKS FOR ELEPHANTS, HIPPOS, WALRUS & NARWHAL ONLY
 delete from national_detail where term_code_1 = 'TUS' AND NOT
-(taxo_data @> '"family_name" => "Elephantidae"'::hstore OR
-taxo_data @> '"family_name" => "Hippopotamidae"'::hstore OR
+(family_name = 'Elephantidae' OR
+family_name = 'Hippopotamidae' OR
 full_name = 'Odobenus rosmarus' or
 full_name = 'Monodon monoceros');
 
@@ -391,8 +475,8 @@ full_name = 'Monodon monoceros');
 
 --Amend, larger range for turtles & tortoises
 --TURTLE CARAPACES
-delete from national_detail where term_code_1 = 'CAP' and NOT
-taxo_data @> '"order_name" => "Testudines"'::hstore;
+delete from national_detail where term_code_1 = 'CAP'
+and order_name != 'Testudines';
 
 --Amend, delete section on EUPHORBIA WAX
 --delete from national_detail where term_code_1 = 'WAX' and
@@ -405,37 +489,32 @@ taxo_data @> '"order_name" => "Testudines"'::hstore;
 --------THE FOLLOWING NEEDS ADDITIONAL TERMS ADDED IF WE USE THIS TO LIMIT THE TERMS FOR THE DASHBOARD
 --deleting out terms not appropriate for the calculations for birds
 delete from national_detail where term_code_1 in ('SKI')
-and NOT taxo_data @> '"class_name" => "Aves"'::hstore;
+and class_name = 'Aves';
 
 --deleting out terms inappropriate for the calculations for amphibians
 delete from national_detail where term_code_1 in ('EGG','EGL')
-and taxo_data @> '"class_name" => "Amphibia"'::hstore;
+and class_name = 'Amphibia';
 
 --Amend, delete 'MEA' from here because we want it for sturgeon
 --deleting out terms inappropriate for the calculations for fish
 delete from national_detail where term_code_1 in ('DER','SKI')
-and (taxo_data @> '"class_name" => "Actinopterygii"'::hstore OR
-taxo_data @> '"class_name" => "Sarcopterygii"'::hstore);
+and (class_name = 'Actinopterygii' OR
+class_name = 'Sarcopterygii');
 
 --deleting out terms inappropriate for the calculations for inverts
 delete from national_detail where term_code_1 in ('DER','EGG')
-and NOT taxo_data @> '"phylum_name" => "Chordata"'::hstore;
+and phylum_name != 'Chordata';
 
---set appendix
-update national_detail set appendix = 'I' where appendix = '1';
-update national_detail set appendix = 'II' where appendix = '2';
-update national_detail set appendix = 'III' where appendix = '3';
-update national_detail set appendix = 'IV' where appendix = '4';
-
---summarise data and import 
-delete from national_trade_summaries; 
-insert into national_trade_summaries (shipment_year,appendix,reporter_type,origin_country_code,import_country_code,export_country_code,term_code,unit_code,quantity,source_code,purpose_code,taxon_group )
-select shipment_year,appendix,reporter_type,origin_country_code,import_country_code,export_country_code,term_code_1,unit_code_1,sum(quantity_1),source_code,purpose_code, new_taxon_code.taxon_group 
-from national_detail 
-  inner join new_taxon_code on national_detail.taxon_concept_id = new_taxon_code.taxon_concepts_id
-  inner join group_terms on new_taxon_code.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code  
+--summarise data and import
+TRUNCATE national_trade_summaries;
+insert into national_trade_summaries (shipment_year,appendix,reporter_type,origin_country_code,import_country_code,export_country_code,term_code,unit_code,quantity,source_code,purpose_code,taxon_group,group_term_id)
+select shipment_year,appendix,reporter_type,origin_country_code,import_country_code,export_country_code,term_code_1,unit_code_1,sum(quantity_1),source_code,purpose_code, taxon_concepts.taxon_group,group_terms.id
+from national_detail
+  inner join taxon_concepts on national_detail.taxon_concept_id = taxon_concepts.id
+  inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
   and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
 where appendix in ('I','II','III')
-group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, new_taxon_code.taxon_group
+group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id
 
+CREATE INDEX index_national_detail_on_taxon_concept_id ON national_detail (taxon_concept_id);
 --Now run 'getting top species' and 'getting top families'
