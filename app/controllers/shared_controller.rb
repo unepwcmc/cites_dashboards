@@ -106,7 +106,7 @@ class SharedController < ApplicationController
     trade =   SharedTradeSummary.families_over_time(familyname, @controlpanel.reportertype, @controlpanel.source, @controlpanel.term, @controlpanel.dateendpoints['startdate'],@controlpanel.dateendpoints['enddate'], @controlpanel.class == NationalControlPanel ? @controlpanel.country : nil)
      @sources = sources
      @familyname = familyname
-     @barchart = get_bar_chart(trade,'vertical','chxtc=0,10|1,10',{:spacing => 5,:width => 25},(@controlpanel.reportertype == "I" ? " Imports " : " Exports ") + ' of ' + familyname,'410x250')
+     @barchart = get_bar_chart(trade,'vertical','chxtc=0,10|1,10',{:spacing => 5,:width => 25},(@controlpanel.reportertype == "I" ? " Imports " : " Exports ") + " of #{familyname}",'410x250')
      render_to_string :partial => 'shared/load_families_chart'
   end
     
