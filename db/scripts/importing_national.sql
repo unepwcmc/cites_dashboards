@@ -514,7 +514,7 @@ from national_detail
   inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
   and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
 where appendix in ('I','II','III')
-group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id
+group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id;
 
 CREATE INDEX index_national_detail_on_taxon_concept_id ON national_detail (taxon_concept_id);
 --Now run 'getting top species' and 'getting top families'
