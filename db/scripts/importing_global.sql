@@ -51,21 +51,21 @@ and class_name = 'Amphibia';
 --PLANTS
 --this updates roots to live for Galanthus
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and genus_name =  'Galanthus';
+and genus_name = 'Galanthus';
 
 --this updates roots to live for Cyclamen spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and genus_name =  'Cyclamen';
+and genus_name = 'Cyclamen';
 
 --this updates roots to live for Sternbergia spp.
 update global_detail set term_code_1 = 'LIV' where term_code_1 = 'ROO'
-and genus_name =  'Sternbergia';
+and genus_name = 'Sternbergia';
 
 --this combines derivatives, extract and powder together for Aloes
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'POW'
-and genus_name =  'Aloe';
+and genus_name = 'Aloe';
 update global_detail set term_code_1 = 'EXT' where term_code_1 = 'DER'
-and genus_name =  'Aloe';
+and genus_name = 'Aloe';
 
 --this combines dried plants and roots for Bletilla striata
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'ROO'
@@ -95,23 +95,23 @@ and full_name = 'Cibotium barometz';
 
 --this combines terms for Dicksonia
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'BAR'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FPT'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'CAR'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'FIB'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'DPL' where term_code_1 = 'STE'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
-and genus_name =  'Dicksonia';
+and genus_name = 'Dicksonia';
 
 --General
 update global_detail set quantity_1 = quantity_1/2 where unit_code_1 = 'SID';
@@ -317,14 +317,14 @@ update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_
 and full_name = 'Prunus africana';
 
 --Gonystylus spp.
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and genus_name =  'Gonystylus';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and genus_name =  'Gonystylus';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and genus_name =  'Gonystylus';
-update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and genus_name =  'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and genus_name = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and genus_name = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and genus_name = 'Gonystylus';
+update global_detail set term_code_1 = 'TIM' where term_code_1 = 'VEN' and genus_name = 'Gonystylus';
 update global_detail set quantity_1 = quantity_1/660 where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and genus_name =  'Gonystylus';
+and genus_name = 'Gonystylus';
 update global_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
-and genus_name =  'Gonystylus';
+and genus_name = 'Gonystylus';
 
 --NEW:  Converts logs, sawn wood, timber pieces and veneer to timber for rest of taxa
 update global_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG';
@@ -368,7 +368,7 @@ class_name = 'Reptilia');
 
 --MUSK FOR MUSK DEER and CIVITIS
 delete from global_detail where term_code_1 = 'MUS' AND NOT
-genus_name =  'Moschus';
+genus_name = 'Moschus';
 
 --FROG MEAT, sturgeon meat & STROMBUS GIGAS MEAT
 delete from global_detail where term_code_1 = 'MEA' and NOT
@@ -444,7 +444,7 @@ select shipment_year,reporter_type,appendix,term_code_1,unit_code_1,sum(quantity
 from global_detail
   inner join taxon_concepts on global_detail.taxon_concept_id = taxon_concepts.id
   inner join group_terms on
-    taxon_concepts.taxon_group = group_terms.taxon_group and global_detail.term_code_1 =  group_terms.term_code
+    taxon_concepts.taxon_group = group_terms.taxon_group and global_detail.term_code_1 = group_terms.term_code
     and (global_detail.unit_code_1 = group_terms.unit_code or (global_detail.unit_code_1 is null and group_terms.unit_code is null))
 where appendix in ('I','II','III')
 group by shipment_year,appendix,reporter_type,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group,group_terms.id;
