@@ -244,7 +244,7 @@ from national_detail n
   inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and
     n.term_code_1 = group_terms.term_code
   and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2013
+where n.shipment_year < 2014
   and EXISTS (SELECT * FROM top_families where top_families.taxon_family = taxon_concepts.family_name
   and n.shipment_year BETWEEN top_families.shipment_year - 5 and top_families.shipment_year)
   AND taxon_concepts.family_name IS NOT NULL
