@@ -1,6 +1,4 @@
-﻿--IF STANDARDISATION SQL HAS BEEN CHANGED, MAKE SURE NATIONAL-DETAIL
---IS REFRESHED BEFORE RUNNING THIS.
-TRUNCATE top_families;
+﻿TRUNCATE top_families;
 --SELECT * from top_families
 
 --Can't just do this using limit 10 on the test queries, as want top 10 for each group.

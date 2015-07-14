@@ -1,5 +1,5 @@
-﻿--IF STANDARDISATION SQL HAS BEEN CHANGED, MAKE SURE NATIONAL-DETAIL IS REFRESHED BEFORE RUNNING THIS.
-TRUNCATE top_species;
+﻿TRUNCATE top_species;
+DROP INDEX IF EXISTS index_top_species_on_taxon_concepts_id;
 --SELECT * from top_species
 --v. 6: Need to make sure looking at approved species code
 
@@ -192,9 +192,10 @@ FROM
     GROUP BY 1,2,3,4,5,6,7,8,9,10) as orig)
     AS ss
 WHERE pos < 11;
+CREATE INDEX index_top_species_on_taxon_concepts_id ON top_species (taxon_concepts_id);
 
 --the species data
-delete from species_trade_summaries;
+TRUNCATE species_trade_summaries;
 insert into species_trade_summaries (shipment_year,appendix,origin_country_code,reporter_type,
   import_country_code,export_country_code,term_code,unit_code,quantity,source_code,purpose_code,
   taxon_group,taxon_concepts_id,cites_name )

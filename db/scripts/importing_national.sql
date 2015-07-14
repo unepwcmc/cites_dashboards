@@ -1,5 +1,6 @@
 ﻿-- import data
 DROP INDEX IF EXISTS index_national_detail_on_taxon_concept_id;
+DROP INDEX IF EXISTS index_national_detail_on_shipment_year;
 TRUNCATE national_detail;
 copy national_detail (
   reporter_type,
@@ -517,4 +518,5 @@ where appendix in ('I','II','III')
 group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id;
 
 CREATE INDEX index_national_detail_on_taxon_concept_id ON national_detail (taxon_concept_id);
+CREATE INDEX index_national_detail_on_shipment_year ON national_detail (shipment_year);
 --Now run 'getting top species' and 'getting top families'
