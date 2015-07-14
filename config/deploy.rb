@@ -5,6 +5,7 @@ require 'brightbox/recipes'
 require 'brightbox/passenger'
 
 set :default_stage, 'staging'
+ssh_options[:forward_agent] = true
 
 set :application, "cites_dashboard"
 set :user, "rails"
@@ -12,6 +13,8 @@ set :repository, "git@github.com:unepwcmc/cites_dashboards"
 
 set :scm, :git
 set :scm_username, "unepwcmc-read"
+
+set :bundle_disable, true
 
 # Target directory for the application on the web and app servers.
 set(:deploy_to) { File.join("", "home", user, "webapps", application) }
