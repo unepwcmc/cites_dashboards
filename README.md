@@ -11,9 +11,9 @@ CITES Trade Data Dashboards (http://dashboards.cites.org/national) provide and o
     * import taxon concepts: import_taxon_concepts.sql
     * VERIFY the automatic mapping by running db/scripts/verify_taxon_groups.sql - in case there are taxa in trade that do not map automatically to CITES dashboards taxon groups, do not proceed until that is resolved by either amending data in Species+ or a workaround in the export_taxon_concepts script
   - import global & national details and aggregate data
-    * Make sure the values on the end of 'importing_global.sql' and 'importing_national.sql' match the years you want to import
     * Use the file 'importing_global.sql' to import the global data
     * Use the file 'importing_national.sql' to import the national data
+    * Amend the date ranges in 'getting top species' and 'getting top families' as required
     * Run 'getting top species' and 'getting top families'
 
 ## About taxon groups

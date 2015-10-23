@@ -1,5 +1,6 @@
 ﻿-- import data
 DROP INDEX IF EXISTS index_national_detail_on_taxon_concept_id;
+DROP INDEX IF EXISTS index_national_detail_on_shipment_year;
 TRUNCATE national_detail;
 copy national_detail (
   reporter_type,
@@ -22,7 +23,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_1990_jan_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_1990_jul_2015.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -44,7 +45,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_1990_2000_jan_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_1990_2000_jul_2015.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -66,7 +67,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_2000_2010_jan_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_2000_2010_jul_2015.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -88,7 +89,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_2010_jan_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_2010_jul_2015.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
@@ -113,7 +114,7 @@ delete from national_detail where order_name = 'Crocodylia'
 and term_code_1 = 'SKI' and unit_code_1 is not null;
 
 --AMPHS: converts frogs legs to meat
-update national_detail set term_code_1 = 'MEA' where term_code_1 = 'LEG' 
+update national_detail set term_code_1 = 'MEA' where term_code_1 = 'LEG'
 and class_name = 'Amphibia';
 
 --PLANTS
@@ -157,7 +158,7 @@ and family_name = 'Cyatheaceae';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'PLY'
 and family_name = 'Cyatheaceae';
 
---this combines terms for Cibotium barometz 
+--this combines terms for Cibotium barometz
 update national_detail set term_code_1 = 'ROO' where term_code_1 = 'DPL'
 and full_name = 'Cibotium barometz';
 
@@ -218,7 +219,7 @@ update national_detail set unit_code_1 = null where unit_code_1 = 'BAK';
 --update national_detail set unit_code_1 = null where unit_code_1 = 'ITE';
 --update national_detail set unit_code_1 = null where unit_code_1 = 'INC';
 
---Converts the unit "pieces" to null, as it is implied that it's pieces for corals, for example. 
+--Converts the unit "pieces" to null, as it is implied that it's pieces for corals, for example.
 update national_detail set unit_code_1 = null where unit_code_1 = 'PCS';
 
 --converts grams to kilograms
@@ -407,7 +408,7 @@ delete from national_detail where term_code_1 ='TIM' and unit_code_1 != 'CUM';
 
 --Italy doesn't report a source for its Appendix-III taxa so this tries to best guess those taxa that are likely to be from wild-sources
 --Appendix III taxa (most notably birds) reported by Italy with no source
---update national_detail set source_code = 'W' where source_code is null and import_country_code = 'IT' and appendix ='3' and 
+--update national_detail set source_code = 'W' where source_code is null and import_country_code = 'IT' and appendix ='3' and
 --export_country_code in ('SN', 'ML', 'TZ', 'GN', 'PK', 'UG', 'GH');
 
 --deletes elephant skins
@@ -511,10 +512,11 @@ insert into national_trade_summaries (shipment_year,appendix,reporter_type,origi
 select shipment_year,appendix,reporter_type,origin_country_code,import_country_code,export_country_code,term_code_1,unit_code_1,sum(quantity_1),source_code,purpose_code, taxon_concepts.taxon_group,group_terms.id
 from national_detail
   inner join taxon_concepts on national_detail.taxon_concept_id = taxon_concepts.id
-  inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and national_detail.term_code_1 =  group_terms.term_code
+  inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and national_detail.term_code_1 = group_terms.term_code
   and (national_detail.unit_code_1 = group_terms.unit_code or (national_detail.unit_code_1 is null and group_terms.unit_code is null))
 where appendix in ('I','II','III')
-group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id
+group by shipment_year,appendix,origin_country_code,reporter_type,import_country_code,export_country_code,term_code_1,unit_code_1,source_code,purpose_code, taxon_concepts.taxon_group, group_terms.id;
 
 CREATE INDEX index_national_detail_on_taxon_concept_id ON national_detail (taxon_concept_id);
+CREATE INDEX index_national_detail_on_shipment_year ON national_detail (shipment_year);
 --Now run 'getting top species' and 'getting top families'

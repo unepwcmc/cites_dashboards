@@ -68,7 +68,7 @@ COPY(
     LEFT JOIN taxon_relationship_types trt
     ON trt.id = tr.taxon_relationship_type_id AND trt.name = 'HAS_TRADE_NAME'
     LEFT JOIN cites_eu_taxon_concepts accepted_names
-    ON tr.taxon_concept_id = accepted_names.id AND accepted_names.name_status IN ('A', 'N')   
+    ON tr.taxon_concept_id = accepted_names.id AND accepted_names.name_status IN ('A', 'N')
     WHERE tc.name_status = 'T'
     GROUP BY tc.id, tc.full_name,
     tc.author_year, tc.name_status, tc.rank_name

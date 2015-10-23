@@ -10,7 +10,7 @@ class GlobalControlPanel
   def self.setrange
     @range = {}
     gap = 4
-    max = 2012 # GlobalTradeSummary.maxdate
+    max = GlobalTradeSummary.maxdate
     min = GlobalTradeSummary.mindate
 
     startdate = max

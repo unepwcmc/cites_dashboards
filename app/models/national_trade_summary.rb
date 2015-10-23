@@ -163,11 +163,11 @@ class NationalTradeSummary < ActiveRecord::Base
     end
 
   def self.maxdate
-    self.maximum(:shipment_year)
+    2013
   end
 
   def self.mindate
-    self.minimum(:shipment_year)
+    1975
   end
 
   def self.get_filter

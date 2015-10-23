@@ -17,7 +17,7 @@ CREATE TABLE taxon_concepts (
   taxon_group TEXT
 );
 
-COPY taxon_concepts FROM '/tmp/taxon_concepts.csv'  DELIMITER ',' CSV;
+COPY taxon_concepts FROM '/tmp/taxon_concepts.csv' DELIMITER ',' CSV;
 
 CREATE UNIQUE INDEX ON taxon_concepts (id);
 CREATE INDEX ON taxon_concepts(taxon_group);
