@@ -19,7 +19,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    googlecharts (1.6.10)
+    googlecharts (1.6.12)
     highline (1.6.21)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -45,6 +45,6 @@ PLATFORMS
 DEPENDENCIES
   capistrano (= 2.15.5)
   capistrano-ext (= 1.2.1)
-  googlecharts (= 1.6.10)
+  googlecharts
   pg
   rails (= 2.3.18)
