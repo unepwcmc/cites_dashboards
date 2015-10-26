@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '= 2.3.16'
+gem 'rails', '= 2.3.18'
 gem 'pg', '=0.13.1'
 gem 'googlecharts', '=1.6.10', :require => 'gchart'
 
