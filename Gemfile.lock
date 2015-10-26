@@ -21,6 +21,7 @@ GEM
       capistrano (>= 1.0.0)
     googlecharts (1.6.12)
     highline (1.6.21)
+    iconv (1.0.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -46,5 +47,6 @@ DEPENDENCIES
   capistrano (= 2.15.5)
   capistrano-ext (= 1.2.1)
   googlecharts
+  iconv
   pg
   rails (= 2.3.18)
