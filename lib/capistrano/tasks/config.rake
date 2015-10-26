@@ -23,37 +23,35 @@ namespace :config do
 task :setup do
 vhost_config = <<-EOF
 server {
-   listen 80;
-   server_name #{fetch(:application)}.#{fetch(:server)};
-   passenger_enabled on;
-   root #{deploy_to}/current/public;
-   rails_env #{fetch(:rails_env)};
-   client_max_body_size 20M;
-   passenger_ruby /home/#{fetch(:deploy_user)}/.rvm/gems/ruby-#{fetch(:rvm_ruby_version)}/wrappers/ruby;
-   gzip on;
-   location ~ ^/assets/ {
-   root #{deploy_to}/current/public;
-   expires max;
-   add_header Cache-Control public;
-   add_header ETag "";
-   break;
- }
-error_page 503 @503;
-# Return a 503 error if the maintenance page exists.
-if (-f #{deploy_to}shared/public/system/maintenance.html) {
-  return 503;
-}
-location @503 {
-  # Serve static assets if found.
-  if (-f $request_filename) {
+  listen 80;
+  server_name #{fetch(:application)}.#{fetch(:server)};
+  passenger_enabled on;
+  root #{deploy_to}/current/public;
+  rails_env #{fetch(:rails_env)};
+  client_max_body_size 20M;
+  passenger_ruby /home/#{fetch(:deploy_user)}/.rvm/gems/ruby-#{fetch(:rvm_ruby_version)}/wrappers/ruby;
+  gzip on;
+  location ~ ^/assets/ {
+    root #{deploy_to}/current/public;
+    expires max;
+    add_header Cache-Control public;
+    add_header ETag "";
     break;
   }
-  # Set root to the shared directory.
-  root #{deploy_to}/shared/public;
-  rewrite ^(.*)$ /system/maintenance.html break;
-}
-  
-  
+  error_page 503 @503;
+  # Return a 503 error if the maintenance page exists.
+  if (-f #{deploy_to}/shared/public/system/maintenance.html) {
+    return 503;
+  }
+  location @503 {
+    # Serve static assets if found.
+    if (-f $request_filename) {
+      break;
+    }
+    # Set root to the shared directory.
+    root #{deploy_to}/shared/public;
+    rewrite ^(.*)$ /system/maintenance.html break;
+  }
 }
 EOF
 
