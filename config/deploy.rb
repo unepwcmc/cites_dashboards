@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-#set :application, 'cites_dashboard_staging'
+set :application, 'cites_dashboard'
 set :repo_url, 'git@github.com:unepwcmc/cites_dashboards.git'
 
 # Default branch is :master
@@ -13,7 +13,7 @@ set :branch, 'LinodeCap3Deploy'
 # set :deploy_to, '/var/www/my_app_name'
 
 set :deploy_user, 'wcmc'
-set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
+#set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
 
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 

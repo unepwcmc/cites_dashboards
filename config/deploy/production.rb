@@ -2,11 +2,12 @@ set :stage, :production
 
 server "citesdashboards-staging.Linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 
-set :application, 'cites_dashboard_production'
+set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 set :server_name, "citesdashboards-staging.Linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
 set :app_port, "80"
 
+set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:full_app_name)}"
 
 # server-based syntax
 # ======================
