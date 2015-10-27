@@ -219,13 +219,13 @@ end
 
 
 
-namespace :config do
- task :setup do
-  on roles(:app, :db) do
-  execute "/bin/bash -l -c '/home/#{fetch(:deploy_user)}/.rvm/gems/ruby-2.1.3/bin/backup generate:config'"
-  end
- end
-end
+#namespace :config do
+# task :setup do
+#  on roles(:app, :db) do
+#  execute "/bin/bash -l -c '/home/#{fetch(:deploy_user)}/.rvm/gems/ruby-2.1.3/bin/backup generate:config'"
+#  end
+# end
+#end
 
 
 

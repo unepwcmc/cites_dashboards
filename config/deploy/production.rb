@@ -1,3 +1,13 @@
+set :stage, :production
+
+server "citesdashboards-staging.Linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
+
+set :application, 'cites_dashboard_production'
+set :server_name, "citesdashboards-staging.Linode.unep-wcmc.org"
+set :sudo_user, "wcmc"
+set :app_port, "80"
+
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

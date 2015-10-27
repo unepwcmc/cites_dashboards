@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'cites_dashboard_staging'
+#set :application, 'cites_dashboard_staging'
 set :repo_url, 'git@github.com:unepwcmc/cites_dashboards.git'
 
 # Default branch is :master
