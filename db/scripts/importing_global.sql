@@ -20,7 +20,7 @@ COPY global_detail (
   kingdom_name,
   taxon_concept_id
 )
-FROM '/tmp/export_global_jul_2015.csv' DELIMITERS ',' CSV;
+FROM '/tmp/export_global_oct_2015.csv' DELIMITERS ',' CSV;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
