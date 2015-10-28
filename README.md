@@ -2,6 +2,12 @@
 
 CITES Trade Data Dashboards (http://dashboards.cites.org/national) provide and overview of CITES trade data.
 
+## Setting up:
+
+This is a Rails 2 application that has been updated to run on Ruby 2.2.3 as described here: http://blog.lucascaton.com.br/index.php/2014/02/28/have-a-rails-2-app-you-can-run-it-on-the-newest-ruby/
+
+Gems are installed via bundler. Database is best obtained from a copy, as migrations don't seem reliable. To start the application locally: `bundle exec script/server`
+
 ## Steps required to update the CITES Dashboards:
   - obtain a fresh copy of both the Species+ & CITES Trade db and last CITES Dashboards db and install them locally; do not run these scripts on production machines
   - export data from Species+ and CITES Trade db

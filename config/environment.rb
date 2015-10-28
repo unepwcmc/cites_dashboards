@@ -5,16 +5,34 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.16' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# Include this before the `Rails::Initializer.run` line:
+if RUBY_VERSION >= '2.0.0'
+  module Gem
+    def self.source_index
+      sources
+    end
+
+    def self.cache
+      sources
+    end
+
+    SourceIndex = Specification
+
+    class SourceList
+      # If you want vendor gems, this is where to start writing code.
+      def search(*args); []; end
+      def each(&block); end
+      include Enumerable
+    end
+  end
+end
+
 Rails::Initializer.run do |config|
-  config.gem "pg"
-  config.gem "googlecharts", :lib => "gchart"
-  #config.gem "brightbox", ">=2.3.9"
-  #config.gem "composite_primary_keys"
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
