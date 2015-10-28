@@ -7,7 +7,7 @@ set :repo_url, 'git@github.com:unepwcmc/cites_dashboards.git'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :branch, 'LinodeCap3Deploy'
+set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
