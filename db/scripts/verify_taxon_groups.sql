@@ -11,7 +11,7 @@ LEFT JOIN taxon_concepts tc
 ON tc.full_name_with_spp = ctc.cites_name
 WHERE tc.taxon_group != ctc.taxon_group OR tc.taxon_group is null
 )
-SELECT COUNT(*) FROM global_detail
+SELECT tc.* FROM global_detail
 JOIN taxon_concepts_with_incorrect_mapping tc ON tc.id = global_detail.taxon_concept_id;
 
 -- Note: 'Pholidota' is an orchid genus and also an order of mammals
