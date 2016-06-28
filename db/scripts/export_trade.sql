@@ -124,21 +124,21 @@ ORDER BY reporter_type, year;
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year < 1990
-) TO '/tmp/export_national_1990_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_1990.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 1990 AND shipment_year < 2000
-) TO '/tmp/export_national_1990_2000_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_1990_2000.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 2000 AND shipment_year < 2010
-) TO '/tmp/export_national_2000_2010_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_2000_2010.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 2010
-) TO '/tmp/export_national_2010_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_2010.csv' WITH CSV;
 
 DROP VIEW IF EXISTS trade_shipments_for_national_detail;

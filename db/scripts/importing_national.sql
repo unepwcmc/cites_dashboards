@@ -23,7 +23,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_1990_oct_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_1990.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -45,7 +45,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_1990_2000_oct_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_1990_2000.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -67,7 +67,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_2000_2010_oct_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_2000_2010.csv' delimiters ',' csv;
 copy national_detail (
   reporter_type,
   shipment_year,
@@ -89,7 +89,7 @@ copy national_detail (
   phylum_name,
   kingdom_name,
   taxon_concept_id
-) from '/tmp/export_national_2010_oct_2015.csv' delimiters ',' csv;
+) from '/tmp/export_national_2010.csv' delimiters ',' csv;
 
 --apply standardisation sql
 --THE FOLLOWING SHOULD BE RUN ON ALL SQLs FOR EC ANALYSIS (EXCEPT CHAPTER 3 SQLS)
