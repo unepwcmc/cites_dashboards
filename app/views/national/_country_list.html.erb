@@ -1,8 +1,8 @@
-<% countries = TradingCountry.find(:all, :conditions => "exclude_from_selection = false").sort{|a,b| a.name <=> b.name} %>
+<% countries = TradingCountry.find(:all, :conditions => "exclude_from_selection = false", :order => "name") %>
 <select name="controlpanel[country]" id="controlpanel_country">
 <% countries.each { |c|%>
   <% if c.dependency_of == nil %>
-      <% dependencies = c.dependent_territories.sort{|a,b| a.name <=> b.name}%>
+      <% dependencies = c.dependent_territories.find(:all, :conditions => "exclude_from_selection = false", :order => 'name') %>
         <% if dependencies.length > 0 %>
             <optgroup label="<%=c.name + ' and its territories' %>">
             <option value="<%=c.iso_country_code%>" <%if c.iso_country_code == @controlpanel.country%>selected="true"<%end%>><%=c.name%></option>
