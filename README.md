@@ -19,8 +19,10 @@ Gems are installed via bundler. Database is best obtained from a copy, as migrat
   - import global & national details and aggregate data
     * Use the file 'importing_global.sql' to import the global data
     * Use the file 'importing_national.sql' to import the national data
-    * Amend the date ranges in 'getting top species' and 'getting top families' as required
-    * Run 'getting top species' and 'getting top families'
+    * Amend the date ranges in 'getting top species' and 'getting top families' as required (HINT: if the last included year from previous update was e.g. 2013, grep for all occurrences of 2013 in those files to know where changes will be needed)
+    * Run 'getting top species' (WARNING: this takes aroung 8 hours, best leave running overnight)
+    * Run 'getting top families'
+    * Amend `maxdate` in `app/models/global_trade_summary.rb` and `app/models/national_trade_summary.rb` 
 
 ## About taxon groups
 
