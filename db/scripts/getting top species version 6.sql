@@ -1,4 +1,6 @@
-﻿TRUNCATE top_species;
+﻿-- WARNING: this takes around 8 hours to compute
+
+TRUNCATE top_species;
 DROP INDEX IF EXISTS index_top_species_on_taxon_concepts_id;
 --SELECT * from top_species
 --v. 6: Need to make sure looking at approved species code
