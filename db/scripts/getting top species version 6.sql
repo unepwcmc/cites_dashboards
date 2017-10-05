@@ -1,3 +1,4 @@
+-- WARNING: this takes around 8 hours to compute
 TRUNCATE top_species;
 DROP INDEX IF EXISTS index_top_species_on_taxon_concepts_id;
 --SELECT * from top_species
@@ -19,6 +20,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     'Global' as import_country_code, 'Global' as export_country_code,
@@ -52,6 +65,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     'Global' as import_country_code, 'Global' as export_country_code,
@@ -84,6 +109,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     import_country_code, 'N/A' as export_country_code,
@@ -115,6 +152,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     'N/A' as import_country_code,export_country_code,
@@ -146,6 +195,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     import_country_code, 'N/A' as export_country_code,
@@ -177,6 +238,18 @@ FROM
             WHEN shipment_year BETWEEN 1984 AND 1988 THEN 1988
             WHEN shipment_year BETWEEN 1979 AND 1983 THEN 1983
             WHEN shipment_year BETWEEN 1975 AND 1978 THEN 1978
+/* Previous version of script; years shifted by one. We might use this one instead.
+=======
+            WHEN shipment_year BETWEEN 2010 AND 2014 THEN 2014
+            WHEN shipment_year BETWEEN 2005 AND 2009 THEN 2009
+            WHEN shipment_year BETWEEN 2000 AND 2004 THEN 2004
+            WHEN shipment_year BETWEEN 1995 AND 1999 THEN 1999
+            WHEN shipment_year BETWEEN 1990 AND 1994 THEN 1994
+            WHEN shipment_year BETWEEN 1985 AND 1989 THEN 1989
+            WHEN shipment_year BETWEEN 1980 AND 1984 THEN 1984
+            WHEN shipment_year BETWEEN 1975 AND 1979 THEN 1979
+>>>>>>> 049c14cad9b57d02931fcc7b3e966cdb96b57dfd
+*/
             ELSE 1900
     END as shipment_year,
     'N/A' as import_country_code, export_country_code,

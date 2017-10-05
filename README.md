@@ -15,12 +15,16 @@ Gems are installed via bundler. Database is best obtained from a copy, as migrat
     * export list of taxon concepts with automatic mapping to dashboard taxon groups: db/scripts/export_taxon_concepts.sql
   - import taxon concepts
     * import taxon concepts: import_taxon_concepts.sql
-    * VERIFY the automatic mapping by running db/scripts/verify_taxon_groups.sql - in case there are taxa in trade that do not map automatically to CITES dashboards taxon groups, do not proceed until that is resolved by either amending data in Species+ or a workaround in the export_taxon_concepts script
+    * VERIFY the automatic mapping by running db/scripts/verify_taxon_groups.sql - in case there are taxa in trade that do not map automatically to CITES dashboards taxon groups, do not proceed until that is resolved by either amending data in Species+ or a workaround in the export_taxon_concepts script. Check with Species team if unsure.
   - import global & national details and aggregate data
     * Use the file 'importing_global.sql' to import the global data
     * Use the file 'importing_national.sql' to import the national data
-    * Amend the date ranges in 'getting top species' and 'getting top families' as required
-    * Run 'getting top species' and 'getting top families'
+    * Amend the date ranges in 'getting top species' and 'getting top families' as required (HINT: if the last included year from previous update was e.g. 2013, grep for all occurrences of 2013 in those files to know where changes will be needed)
+    * Run 'getting top species' (**WARNING: this takes around 8 hours**, best leave running overnight)
+    * Run 'getting top families'
+    * Amend `maxdate` in `app/models/global_trade_summary.rb` and `app/models/national_trade_summary.rb`
+  - copy the database from localhost to staging and let Species team know it is ready for their verification
+  - if all good, replace the production database with the staging database
 
 ## About taxon groups
 

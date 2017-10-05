@@ -41,20 +41,20 @@ WHERE (purposes.code in ('T','H','P') OR purposes.code IS NULL)
   AND appendix <> 'N' -- required field
   AND country_of_origin_id IS NULL
 GROUP BY reporter_type,
-   year,
-   appendix,
-   taxon_concept_id,
-   tc.full_name,
-   tc.data,
-   term_code_1,
-   unit_code_1,
-   source_code,
-   purpose_code
+  year,
+  appendix,
+  taxon_concept_id,
+  tc.full_name,
+  tc.data,
+  term_code_1,
+  unit_code_1,
+  source_code,
+  purpose_code
 ORDER BY reporter_type, year;
 
 COPY(
   SELECT * FROM trade_shipments_for_global_detail
-) TO '/tmp/export_global_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_global.csv' WITH CSV;
 
 DROP VIEW IF EXISTS trade_shipments_for_global_detail;
 
@@ -107,38 +107,38 @@ WHERE (purposes.code in ('T','H','P') OR purposes.code IS NULL)
   AND importer_id <> exporter_id
   AND appendix <> 'N'
 GROUP BY reporter_type,
-       year,
-       appendix,
-       taxon_concept_id,
-       tc.full_name,
-       tc.data,
-       importer_country_code,
-       exporter_country_code,
-       origin_country_code,
-       term_code_1,
-       unit_code_1,
-       source_code,
-       purpose_code
+  year,
+  appendix,
+  taxon_concept_id,
+  tc.full_name,
+  tc.data,
+  importer_country_code,
+  exporter_country_code,
+  origin_country_code,
+  term_code_1,
+  unit_code_1,
+  source_code,
+  purpose_code
 ORDER BY reporter_type, year;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year < 1990
-) TO '/tmp/export_national_1990_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_1990.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 1990 AND shipment_year < 2000
-) TO '/tmp/export_national_1990_2000_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_1990_2000.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 2000 AND shipment_year < 2010
-) TO '/tmp/export_national_2000_2010_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_2000_2010.csv' WITH CSV;
 
 COPY(
   SELECT * FROM trade_shipments_for_national_detail
   WHERE shipment_year >= 2010
-) TO '/tmp/export_national_2010_oct_2015.csv' WITH CSV;
+) TO '/tmp/export_national_2010.csv' WITH CSV;
 
 DROP VIEW IF EXISTS trade_shipments_for_national_detail;
