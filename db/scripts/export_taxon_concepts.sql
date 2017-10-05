@@ -160,7 +160,7 @@ COPY(
     GROUP BY tc.id, tc.full_name,
     tc.author_year, tc.name_status, tc.rank_name
   ), taxa_with_higher_taxonomy AS (
-    SELECT * FROM accepted_names
+    SELECT * FROM accepted_names WHERE has_higher_taxonomy
     UNION
     SELECT * FROM synonyms WHERE has_higher_taxonomy
     UNION
@@ -202,7 +202,7 @@ COPY(
         WHEN class_name = 'Aves' THEN 'Birds'
         WHEN class_name = 'Reptilia' THEN 'Reptiles'
         WHEN class_name = 'Amphibia' THEN 'Amphibians'
-        WHEN class_name IN ('Actinopterygii', 'Elasmobranchii', 'Sarcopterygii') THEN 'Fish'
+        WHEN class_name IN ('Actinopteri', 'Elasmobranchii', 'Dipneusti', 'Coelacanthi') THEN 'Fish'
         WHEN class_name IN ('Anthozoa', 'Hydrozoa') THEN 'Corals'
         WHEN kingdom_name = 'Animalia' AND phylum_name != 'Chordata' AND class_name NOT IN ('Anthozoa', 'Hydrozoa') THEN 'Invertebrates (non-corals)'
         WHEN full_name IN ('Chamaeleon', 'Pelophilus') THEN 'Reptiles' -- these synonyms occur in trade and there is no automatic way of inferring the class, because no accepted name is specified

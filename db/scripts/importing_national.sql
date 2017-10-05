@@ -1,4 +1,3 @@
-﻿-- import data
 DROP INDEX IF EXISTS index_national_detail_on_taxon_concept_id;
 DROP INDEX IF EXISTS index_national_detail_on_shipment_year;
 TRUNCATE national_detail;
@@ -385,7 +384,7 @@ and full_name = 'Prunus africana';
 update national_detail set unit_code_1 = 'CUM' where unit_code_1 = 'KIL' and term_code_1 = 'TIM'
 and full_name = 'Prunus africana';
 
---Gonystylus spp. 
+--Gonystylus spp.
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'LOG' and split_part(full_name, ' ', 1) = 'Gonystylus';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'SAW' and split_part(full_name, ' ', 1) = 'Gonystylus';
 update national_detail set term_code_1 = 'TIM' where term_code_1 = 'TIP' and split_part(full_name, ' ', 1) = 'Gonystylus';
@@ -499,8 +498,8 @@ and class_name = 'Amphibia';
 --Amend, delete 'MEA' from here because we want it for sturgeon
 --deleting out terms inappropriate for the calculations for fish
 delete from national_detail where term_code_1 in ('DER','SKI')
-and (class_name = 'Actinopterygii' OR
-class_name = 'Sarcopterygii');
+and (class_name = 'Actinopteri' OR
+class_name = 'Dipneusti');
 
 --deleting out terms inappropriate for the calculations for inverts
 delete from national_detail where term_code_1 in ('DER','EGG')

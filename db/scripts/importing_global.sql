@@ -430,7 +430,7 @@ and class_name = 'Amphibia';
 --Amend, delete 'MEA' from here because we want it for sturgeon
 --deleting out terms inappropriate for the calculations for fish
 delete from global_detail where term_code_1 in ('DER','SKI')
-and (class_name = 'Actinopterygii' OR class_name = 'Sarcopterygii');
+and (class_name = 'Actinopteri' OR class_name = 'Dipneusti');
 
 --deleting out terms inappropriate for the calculations for inverts
 delete from global_detail where term_code_1 in ('DER','EGG')
