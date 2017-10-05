@@ -1,4 +1,4 @@
-﻿TRUNCATE top_species;
+TRUNCATE top_species;
 DROP INDEX IF EXISTS index_top_species_on_taxon_concepts_id;
 --SELECT * from top_species
 --v. 6: Need to make sure looking at approved species code
@@ -11,7 +11,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1 ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -44,7 +44,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1, source_code ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -76,7 +76,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1, import_country_code ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -107,7 +107,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1,export_country_code ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -138,7 +138,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1, import_country_code, source_code ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -169,7 +169,7 @@ FROM
   (SELECT shipment_year, taxon_group, reporter_type, term_code_1,unit_code_1,source_code,import_country_code,export_country_code, taxon_concepts_id, quantity_1,
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,unit_code_1, export_country_code, source_code ORDER BY quantity_1 DESC, taxon_concepts_id) AS pos, full_name_with_spp
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -206,7 +206,7 @@ from national_detail n
   inner join taxon_concepts tc on n.taxon_concept_id = tc.id
   inner join group_terms on tc.taxon_group = group_terms.taxon_group and n.term_code_1 = group_terms.term_code
     and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2014
+where n.shipment_year < 2016
 and EXISTS (SELECT * FROM top_species inner join taxon_concepts c on top_species.taxon_concepts_id = tc.id
 where tc.id = n.taxon_concept_id and n.shipment_year BETWEEN top_species.shipment_year - 5 and top_species.shipment_year)
 group by n.shipment_year,appendix,origin_country_code,n.reporter_type,n.import_country_code,n.export_country_code,

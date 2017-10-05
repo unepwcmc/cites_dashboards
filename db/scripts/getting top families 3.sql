@@ -1,4 +1,4 @@
-﻿TRUNCATE top_families;
+TRUNCATE top_families;
 --SELECT * from top_families
 
 --Can't just do this using limit 10 on the test queries, as want top 10 for each group.
@@ -13,7 +13,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1 ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -50,7 +50,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -88,7 +88,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, import_country_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -125,7 +125,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, export_country_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -162,7 +162,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, import_country_code,source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -199,7 +199,7 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, export_country_code,source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2009 AND 2013 THEN 2013
+            WHEN shipment_year BETWEEN 2009 AND 2015 THEN 2015
             WHEN shipment_year BETWEEN 2004 AND 2008 THEN 2008
             WHEN shipment_year BETWEEN 1999 AND 2003 THEN 2003
             WHEN shipment_year BETWEEN 1994 AND 1998 THEN 1998
@@ -242,7 +242,7 @@ from national_detail n
   inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and
     n.term_code_1 = group_terms.term_code
   and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2014
+where n.shipment_year < 2016
   and EXISTS (SELECT * FROM top_families where top_families.taxon_family = taxon_concepts.family_name
   and n.shipment_year BETWEEN top_families.shipment_year - 5 and top_families.shipment_year)
   AND taxon_concepts.family_name IS NOT NULL
