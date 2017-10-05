@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>CITES Trade Data Dashboards</title>
@@ -16,6 +16,10 @@
     .wcmcfooter {
         color:gray;
         text-align:center;
+    }
+    .wcmcfooter img {
+      height: 40px;
+      padding: 10px;
     }
     body { font-family: arial; font-size:12px; margin:0; }
     #page { width:950px; margin:0 auto; color: #385d8a; }
@@ -49,9 +53,9 @@
     }
   </script>
 </head>
-<body class="markeeta"> 
-<div id="outer"> 
-<div id="container"> 
+<body class="markeeta">
+<div id="outer">
+<div id="container">
 <!-- include("http://www.cites.org/eng/inc/header.php"); -->
 <script type="text/javascript" src="/js/milonic_src.js"></script>
 <script type="text/javascript">
@@ -64,7 +68,7 @@ else _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenudom.
 <div id="header">
 <!-- end #header --></div>
 <div id="menutop">
-<div id="search">  
+<div id="search">
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <form method="get" action="http://www.cites.org/eng/results.php">
   <input name="cites" type="text" size="40" placeholder="search CITES.org" />
@@ -356,7 +360,10 @@ else _d.write("<script language=JavaScript src=http://www.cites.org/js/mmenudom.
             </select>
         </div>
     </div>
-    <div class="wcmcfooter">This facility was developed and is maintained by UNEP-WCMC for the CITES Secretariat. <img src="unep-wcmc.gif" alt="WCMC logo" align="middle"/></div>
+    <div class="wcmcfooter">
+      This facility was developed and is maintained by UNEP-WCMC for the CITES Secretariat.
+      <img src="https://s3.amazonaws.com/wcmc.logo/UN-Environment-WCMC+logo+2017.svg" alt="WCMC logo" align="middle"/>
+    </div>
 <!-- end #milieu --></div>
 <!-- include("http://www.cites.org/eng/inc/footer.php"); -->
 <div id="footer"><p><a href="http://cites.org/eng/disclaimer.php">Disclaimer</a>&nbsp;  &nbsp;|&nbsp; <a href="http://cites.org/eng/contact.php">Contact us</a>&nbsp;  |&nbsp; <a href="http://cites.org/eng/contact.php">FAQs</a></p>
