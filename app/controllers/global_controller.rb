@@ -62,6 +62,7 @@ private
                         :bar_colors => ['003C30','80CDC1'],
                         :custom => 'chxtc=0,10|1,10&chxp=2,' + calculate_y_axis_midpoint([results["chartdata"]["Imports"],results["chartdata"]["Exports"]],results["yaxislabels"].max),
                         :max_value =>  results["datarange"][1],
+                        :use_ssl => true,
                         :format => 'image_tag').to_s.gsub("%26","&").gsub("%3B",";")
       else
         @chart = "No data for this selection"

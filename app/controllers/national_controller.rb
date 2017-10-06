@@ -1,5 +1,5 @@
 class NationalController < SharedController
-  @bannersource = '<img src="../images/taxonomic1.gif" alt="Banner Logo"/>' 
+  @bannersource = '<img src="../images/taxonomic1.gif" alt="Banner Logo"/>'
   def index
     if params[:id] == nil and session[:controlpanel] != nil and session[:controlpanel].class == NationalControlPanel
       @controlpanel = session[:controlpanel]
@@ -60,7 +60,7 @@ private
       results =  SharedTradeSummary.trade_over_time(@controlpanel.group,@controlpanel.source,@controlpanel.term,@controlpanel.dateendpoints['startdate'],@controlpanel.dateendpoints['enddate'],@controlpanel.country,@controlpanel.reportertype)
       legend = [(@controlpanel.reportertype == "I" ? "Imports" : "Exports") + ' reported by ' + results["countryforlegend"],'Trade reported by ' + (@controlpanel.reportertype == "I" ? "exporters " : "importers ")]
       data = (@controlpanel.reportertype == "I" ? [results["chartdata"]["Imports"],results["chartdata"]["Exports"]] : [results["chartdata"]["Exports"],results["chartdata"]["Imports"]])
-      
+
       if (results["chartdata"]["Imports"].sum + results["chartdata"]["Exports"].sum) > 0
         @chart = Gchart.line(:size => '600x270',
                       #:title => "example title",
@@ -73,6 +73,7 @@ private
                       :axis_labels => [results["xaxislabels"],results["yaxislabels"],GroupTerm.term_description(@controlpanel.term)],
                       :bar_colors => ['003C30','80CDC1'],
                       :custom => 'chxtc=0,10|1,10&chxp=2,' + calculate_y_axis_midpoint(data,results["yaxislabels"].max),
+                      :use_ssl => true,
                       :format => 'image_tag').to_s.gsub("%26","&").gsub("%3B",";")
       else
         @chart = "No data for this selection"
@@ -105,6 +106,6 @@ private
        @legend = @controlpanel.group + ', ' + @controlpanel.countrydescription
        @reporttype = "Species Occurrence"
        @mapdata = "[]"
-       @mapdataarray = [] 
+       @mapdataarray = []
   end
 end

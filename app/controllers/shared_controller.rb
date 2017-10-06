@@ -4,10 +4,10 @@ class SharedController < ApplicationController
         sources =  SharedTradeSummary.top_10_partner(@controlpanel.group,@controlpanel.term,@controlpanel.dateendpoints['startdate'],@controlpanel.dateendpoints['enddate'],type,@controlpanel.source,@controlpanel.country)
       else
         sources =  SharedTradeSummary.top_10_partner(@controlpanel.group,@controlpanel.term,@controlpanel.dateendpoints['startdate'],@controlpanel.dateendpoints['enddate'],type,@controlpanel.source,nil)
-      end      
+      end
       if sources["xaxislabels"].length > 0 #i.e. we have data
         #calculate appropriate width for chart
-        @chart = get_bar_chart(sources, 'horizontal', 'chxtc=0,10|1,10|2,10',{:spacing => 5,:width => 15},nil,'550x250')        
+        @chart = get_bar_chart(sources, 'horizontal', 'chxtc=0,10|1,10|2,10',{:spacing => 5,:width => 15},nil,'550x250')
         @mapdata = sources["mapdatastring"]
         @mapdataarray = sources["mapdataarray"]
       else
@@ -59,6 +59,7 @@ class SharedController < ApplicationController
                     :bar_colors => ['01665E','67A39F','CDE1DF'],
                     :custom => 'chxtc=0,10|1,10&chxp=2,' + calculate_y_axis_midpoint(sources["stackeddata"],sources["datarange"][1]),
                     :max_value =>  sources["datarange"][1],
+                    :use_ssl => true,
                     :format => 'image_tag').to_s
       end
       @chart = sources["data"].sum > 0 ? get_pie_chart(sources,'vertical','360x250',['01665E','67A39F','CDE1DF']) + chart : "No data for this selection"
@@ -109,7 +110,7 @@ class SharedController < ApplicationController
      @barchart = get_bar_chart(trade,'vertical','chxtc=0,10|1,10',{:spacing => 5,:width => 25},(@controlpanel.reportertype == "I" ? " Imports " : " Exports ") + " of #{familyname}",'410x250')
      render_to_string :partial => 'shared/load_families_chart'
   end
-    
+
   def load_species_chart()
     @controlpanel = session[:controlpanel]
     sources =  SharedTradeSummary.top_species(@controlpanel.group,@controlpanel.term,@controlpanel.dateendpoints['startdate'],@controlpanel.dateendpoints['enddate'],@controlpanel.reportertype,@controlpanel.source, @controlpanel.class == NationalControlPanel ? @controlpanel.country : nil)
@@ -134,6 +135,7 @@ class SharedController < ApplicationController
                     :labels => piesources[1],
                     :bar_colors => barcolours[0..piesources[0].length-1],
                     #:custom => "chp=-1.57",
+                    :use_ssl => true,
                     :format => 'image_tag').to_s
 
       if exportersources["legend"].include?("Artificially propagated (App. I, commercial) (D)")
@@ -153,6 +155,7 @@ class SharedController < ApplicationController
                     :bar_colors => barcolours,
                     :custom => 'chxtc=0,10|1,10&chxp=2,' + calculate_y_axis_midpoint(exportersources["data"],exportersources["datarange"][1]),
                     :max_value =>  exportersources["datarange"][1],
+                    :use_ssl => true,
                     :format => 'image_tag').to_s
     else
       @chart = "No data for this selection"
@@ -179,6 +182,7 @@ private
                         :max_value =>  source["datarange"][1],                    #Need to set scale on both data (chds) and axis (chxr)
                         :custom => (tickmarks != nil ? (tickmarks + '&') : 'chxtc=0,10|1,10&') + 'chxp=' + (source["axislabels"].length-1).to_s + ',50', #chxtc
                         :format => 'image_tag',
+                        :use_ssl => true,
                         :class => "barchart").to_s.gsub("%26","&").gsub("%3B",";").gsub('+&+','+%26+') #need to retain code for & in country names
   end
 
@@ -191,15 +195,16 @@ private
                         :axis_labels => source["pielabels"],
                         :bar_colors => barcolours,
                         :max_value =>  source["datarange"][1],
+                        :use_ssl => true,
                         :format => 'image_tag').to_s
   end
 
-  def calculate_y_axis_midpoint(data,maxvalue)  #tries to solve y-axis label alignment problem when there are multiple chxr values 
+  def calculate_y_axis_midpoint(data,maxvalue)  #tries to solve y-axis label alignment problem when there are multiple chxr values
     if data.length == 1                         #Only seems to affect data with > 1 series
       return '50'                               #This seems to work as the default if there's only one series
     end
 
-    minvalue = 0    
+    minvalue = 0
     if data.length == 2 && data[1][0] != nil
       minvalue = data[1][0]                      #Need the first value of the second data series (will come out as chxr 2)
     elsif data.length > 2 && data[2][0] != nil
