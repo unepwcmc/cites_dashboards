@@ -14,9 +14,9 @@ class GlobalControlPanel
     min = GlobalTradeSummary.mindate
 
     startdate = max
-    while startdate >=  min
+    while startdate >  min
       enddate = startdate - gap
-      enddate = min if enddate < min
+      enddate = min if enddate < min || ((enddate - 1975) < gap)
       @range[startdate.to_s] = {'enddate' => startdate, 'description' => (enddate >= min ? enddate : min).to_s + "-" + startdate.to_s , 'startdate' => enddate}
       startdate -= gap+1
     end
