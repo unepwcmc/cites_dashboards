@@ -161,7 +161,7 @@ class LoadTradingCountries < ActiveRecord::Migration
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Ireland' , 'IE' ,2002,4);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Kuwait' , 'KW' ,2002,2);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Bhutan' , 'BT' ,2002,2);"
-    execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Libyan Arab Jamahiriya' , 'LY' ,2003,1);"
+    execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Libya' , 'LY' ,2003,1);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Syrian Arab Republic' , 'SY' ,2003,2);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Albania' , 'AL' ,2003,4);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Lesotho' , 'LS' ,2003,1);"
@@ -169,7 +169,7 @@ class LoadTradingCountries < ActiveRecord::Migration
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Palau' , 'PW' ,2004,6);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Samoa' , 'WS' ,2005,6);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('San Marino' , 'SM' ,2005,4);"
-    execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Cape Verde' , 'CV' ,2005,1);"
+    execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Cabo Verde' , 'CV' ,2005,1);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Montenegro' , 'ME' ,2006,4);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Serbia' , 'RS' ,2006,4);"
     execute "INSERT INTO trading_countries (name,iso_country_code,entry_date,cites_region_code) VALUES ('Solomon Islands' , 'SB' ,2007,6);"
@@ -261,7 +261,7 @@ execute "INSERT INTO trading_countries (name,iso_country_code,exclude_from_selec
 execute "INSERT INTO trading_countries (name,iso_country_code,exclude_from_selection) VALUES ('South America', 'XM',true)"
 execute "INSERT INTO trading_countries (name,iso_country_code,exclude_from_selection) VALUES ('Asia', 'XS',true)"
 execute "INSERT INTO trading_countries (name,iso_country_code,exclude_from_selection) VALUES ('Unknown', 'XX',true)"
-    
+
   end
 
   def self.down
