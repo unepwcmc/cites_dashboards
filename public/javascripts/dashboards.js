@@ -67,30 +67,33 @@ function drawMap() {
     data.addRows(dataarray.length + 1);
     data.addColumn('string', 'Country');
     data.addColumn('number', legend);
-    data.addColumn('string', 'Partner');
+    // Commented to be googleChart compatible
+    //data.addColumn('string', 'Partner');
 
     // Requirement for legend to start from 0 instead of minimum number in data set
     data.setValue(0, 0, '');
     data.setValue(0, 1, 0);
-    data.setValue(0, 2, '');
+    // Commented to be googleChart compatible
+    //data.setValue(0, 2, '');
 
     for (var i = 0; i < dataarray.length; i++)
     {
-        data.setValue(i+1, 0, dataarray[i][0]);
+        data.setValue(i+1, 0, dataarray[i][2]);
         data.setValue(i+1, 1, dataarray[i][1]);
-        data.setValue(i+1, 2, dataarray[i][2]);
+        // Commented to be googleChart compatible
+        //data.setValue(i+1, 2, dataarray[i][2]);
     }
 
     var options = {};
     options['dataMode'] = 'regions';
-    options['colors'] = ['0xF6E8C3','0xBF812D','0x543005']; //earth colors
+    options['colors'] = ['F6E8C3','BF812D','543005']; //earth colors
     //options['width'] = '300px';
     //options['height'] = '250px';
 
     var container = document.getElementById("map");
     if (container != null)
     {
-        var geomap = new google.visualization.GeoMap(container);
+        var geomap = new google.visualization.GeoChart(container);
         geomap.draw(data, options);
     }
 };
@@ -114,7 +117,7 @@ function generate_species_trade()
     var url = RAILS_ROOT +'/shared/load_species_chart';
     var params = 'speciescode=' + jQuery("#speciesselect option:selected").val();
     var target = 'speciesdiv';
-    var myAjax = new Ajax.Updater(target, url, {method: 'get', parameters: params, onComplete : function () {setCluetip("#speciesanchor");}});   
+    var myAjax = new Ajax.Updater(target, url, {method: 'get', parameters: params, onComplete : function () {setCluetip("#speciesanchor");}});
 }
 
 function generate_families_trade()
