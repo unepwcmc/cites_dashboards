@@ -10,7 +10,7 @@ class GlobalTradeSummary < ActiveRecord::Base
   end
 
  def self.maxdate
-    2015
+    2016
   end
 
   def self.mindate
