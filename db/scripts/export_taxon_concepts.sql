@@ -197,13 +197,18 @@ COPY(
       CASE
         WHEN family_name = 'Orchidaceae' THEN 'Orchids'
         WHEN family_name = 'Cactaceae' THEN 'Cacti'
-        WHEN kingdom_name = 'Plantae' AND family_name NOT IN ('Orchidaceae', 'Cactaceae') THEN 'Plants (excluding cacti & orchids)'
+        WHEN kingdom_name = 'Plantae' AND (
+          family_name NOT IN ('Orchidaceae', 'Cactaceae') OR COALESCE(family_name, '') = ''
+        ) THEN 'Plants (excluding cacti & orchids)'
         WHEN class_name = 'Mammalia' THEN 'Mammals'
         WHEN class_name = 'Aves' THEN 'Birds'
         WHEN class_name = 'Reptilia' THEN 'Reptiles'
         WHEN class_name = 'Amphibia' THEN 'Amphibians'
         WHEN class_name IN ('Actinopteri', 'Elasmobranchii', 'Dipneusti', 'Coelacanthi') THEN 'Fish'
-        WHEN class_name IN ('Anthozoa', 'Hydrozoa') THEN 'Corals'
+        WHEN class_name IN ('Anthozoa', 'Hydrozoa') OR (
+          COALESCE(class_name, '') = '' AND COALESCE(order_name, '') = '' AND COALESCE(family_name, '') = ''
+          AND COALESCE(genus_name, '') = '' AND  phylum_name = 'Cnidaria'
+        ) THEN 'Corals'
         WHEN kingdom_name = 'Animalia' AND phylum_name != 'Chordata' AND class_name NOT IN ('Anthozoa', 'Hydrozoa') THEN 'Invertebrates (non-corals)'
         WHEN full_name IN ('Chamaeleon', 'Pelophilus') THEN 'Reptiles' -- these synonyms occur in trade and there is no automatic way of inferring the class, because no accepted name is specified
       END AS taxon_group

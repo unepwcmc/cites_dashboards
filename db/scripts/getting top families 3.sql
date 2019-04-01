@@ -13,13 +13,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1 ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -50,13 +50,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -88,13 +88,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, import_country_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -125,13 +125,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, export_country_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -162,13 +162,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, import_country_code,source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -199,13 +199,13 @@ FROM
           rank() OVER (PARTITION BY shipment_year, reporter_type,taxon_group,term_code_1,
           unit_code_1, export_country_code,source_code ORDER BY quantity_1 DESC, family_name) AS pos
      FROM (SELECT reporter_type, CASE
-            WHEN shipment_year BETWEEN 2011 AND 2015 THEN 2015
-            WHEN shipment_year BETWEEN 2006 AND 2010 THEN 2010
-            WHEN shipment_year BETWEEN 2001 AND 2005 THEN 2005
-            WHEN shipment_year BETWEEN 1996 AND 2000 THEN 2000
-            WHEN shipment_year BETWEEN 1991 AND 1995 THEN 1995
-            WHEN shipment_year BETWEEN 1986 AND 1990 THEN 1990
-            WHEN shipment_year BETWEEN 1981 AND 1985 THEN 1985
+            WHEN shipment_year BETWEEN 2012 AND 2016 THEN 2016
+            WHEN shipment_year BETWEEN 2007 AND 2011 THEN 2011
+            WHEN shipment_year BETWEEN 2002 AND 2006 THEN 2006
+            WHEN shipment_year BETWEEN 1997 AND 2001 THEN 2001
+            WHEN shipment_year BETWEEN 1992 AND 1996 THEN 1996
+            WHEN shipment_year BETWEEN 1987 AND 1991 THEN 1991
+            WHEN shipment_year BETWEEN 1981 AND 1986 THEN 1986
             WHEN shipment_year BETWEEN 1975 AND 1980 THEN 1980
             ELSE 1900
     END as shipment_year,
@@ -242,7 +242,7 @@ from national_detail n
   inner join group_terms on taxon_concepts.taxon_group = group_terms.taxon_group and
     n.term_code_1 = group_terms.term_code
   and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2016
+where n.shipment_year < 2017
   and EXISTS (SELECT * FROM top_families where top_families.taxon_family = taxon_concepts.family_name
   and n.shipment_year BETWEEN top_families.shipment_year - 5 and top_families.shipment_year)
   AND taxon_concepts.family_name IS NOT NULL
