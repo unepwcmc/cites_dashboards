@@ -1,0 +1,4 @@
+## 2018 UPDATE
+
+* Update year ranges to include 2016
+* Update taxonomic class mapping to include Cnidaria phylum in Corals
