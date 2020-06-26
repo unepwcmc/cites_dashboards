@@ -1,3 +1,7 @@
+## 2020 UPDATE
+
+* Update year ranges to include 2018
+
 ## 2019 UPDATE
 
 * Update year ranges to include 2017
