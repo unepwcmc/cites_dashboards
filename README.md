@@ -11,10 +11,10 @@ Gems are installed via bundler. Database is best obtained from a copy, as migrat
 ## Steps required to update the CITES Dashboards:
   - obtain a fresh copy of both the Species+ & CITES Trade db and last CITES Dashboards db and install them locally; do not run these scripts on production machines
   - export data from Species+ and CITES Trade db
-    * export trade in format ready for global / national details: db/scripts/export_trade.sql
-    * export list of taxon concepts with automatic mapping to dashboard taxon groups: db/scripts/export_taxon_concepts.sql
+    * export trade in format ready for global / national details: db/scripts/export_trade.sql (psql -d sapi_database -f db/scripts/export_trade.sql)
+    * export list of taxon concepts with automatic mapping to dashboard taxon groups: db/scripts/export_taxon_concepts.sql (psql -d sapi_database -f db/scripts/export_taxon_concepts.sql)
   - import taxon concepts
-    * import taxon concepts: import_taxon_concepts.sql
+    * import taxon concepts: import_taxon_concepts.sql (psql -d cites_trade_database -f db/scripts/import_taxon_concepts.sql)
     * VERIFY the automatic mapping by running db/scripts/verify_taxon_groups.sql - in case there are taxa in trade that do not map automatically to CITES dashboards taxon groups, do not proceed until that is resolved by either amending data in Species+ or a workaround in the export_taxon_concepts script. Check with Species team if unsure.
   - import global & national details and aggregate data
     * Use the file 'importing_global.sql' to import the global data
