@@ -214,7 +214,7 @@ from national_detail n
   inner join taxon_concepts tc on n.taxon_concept_id = tc.id
   inner join group_terms on tc.taxon_group = group_terms.taxon_group and n.term_code_1 = group_terms.term_code
     and (n.unit_code_1 = group_terms.unit_code or (n.unit_code_1 is null and group_terms.unit_code is null))
-where n.shipment_year < 2018
+where n.shipment_year < 2019
 and EXISTS (SELECT * FROM top_species inner join taxon_concepts c on top_species.taxon_concepts_id = tc.id
 where tc.id = n.taxon_concept_id and n.shipment_year BETWEEN top_species.shipment_year - 5 and top_species.shipment_year)
 group by n.shipment_year,appendix,origin_country_code,n.reporter_type,n.import_country_code,n.export_country_code,
