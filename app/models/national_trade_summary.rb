@@ -163,7 +163,7 @@ class NationalTradeSummary < ActiveRecord::Base
     end
 
   def self.maxdate
-    2017
+    2018
   end
 
   def self.mindate

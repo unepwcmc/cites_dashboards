@@ -11,15 +11,16 @@ Gems are installed via bundler. Database is best obtained from a copy, as migrat
 ## Steps required to update the CITES Dashboards:
   - obtain a fresh copy of both the Species+ & CITES Trade db and last CITES Dashboards db and install them locally; do not run these scripts on production machines
   - export data from Species+ and CITES Trade db
-    * export trade in format ready for global / national details: db/scripts/export_trade.sql
-    * export list of taxon concepts with automatic mapping to dashboard taxon groups: db/scripts/export_taxon_concepts.sql
+    * export trade in format ready for global / national details: db/scripts/export_trade.sql (psql -d sapi_database -f db/scripts/export_trade.sql)
+    * export list of taxon concepts with automatic mapping to dashboard taxon groups: db/scripts/export_taxon_concepts.sql (psql -d sapi_database -f db/scripts/export_taxon_concepts.sql)
   - import taxon concepts
-    * import taxon concepts: import_taxon_concepts.sql
+    * import taxon concepts: import_taxon_concepts.sql (psql -d cites_trade_database -f db/scripts/import_taxon_concepts.sql)
     * VERIFY the automatic mapping by running db/scripts/verify_taxon_groups.sql - in case there are taxa in trade that do not map automatically to CITES dashboards taxon groups, do not proceed until that is resolved by either amending data in Species+ or a workaround in the export_taxon_concepts script. Check with Species team if unsure.
   - import global & national details and aggregate data
     * Use the file 'importing_global.sql' to import the global data
     * Use the file 'importing_national.sql' to import the national data
     * Amend the date ranges in 'getting top species' and 'getting top families' as required (HINT: if the last included year from previous update was e.g. 2013, grep for all occurrences of 2013 in those files to know where changes will be needed). Usually the ranges include 5 years and when adding a new year these may need to be rearranged; please speak with Species team if unsure.
+    Also make sure to update the date on the species/families_trade_summaries last insert query
     * Run 'getting top species' (**WARNING: this takes around 8 hours**, best leave running overnight)
     * Run 'getting top families'
     * Amend `maxdate` in `app/models/global_trade_summary.rb` and `app/models/national_trade_summary.rb`
