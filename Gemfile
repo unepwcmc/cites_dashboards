@@ -5,7 +5,7 @@ end
 
 
 source 'https://rubygems.org'
-gem 'rails', '= 2.3.18'
+gem 'rails', '3.2.17'
 gem 'pg'
 gem 'googlecharts', :require => 'gchart'
 gem 'iconv'
